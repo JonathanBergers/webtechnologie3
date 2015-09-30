@@ -21,7 +21,7 @@ public class Model {
         this.movies = new Movies();
     }
 
-    }
+}
 
     
-}
+

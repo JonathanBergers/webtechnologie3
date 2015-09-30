@@ -1,12 +1,15 @@
 package model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Date;
+
 
 /**
  * Created by jonathan on 30-9-15.
  */
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Movie {
 
     private int id;

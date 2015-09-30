@@ -3,7 +3,6 @@ package model;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,21 +11,25 @@ import java.util.List;
 @XmlRootElement
 public class Movies {
 
-    public List<Movie> movies;
+    private List<Movie> movies = new ArrayList<>();
 
     public Movies() {
-        movies = new ArrayList<>();
-        movies.add(new Movie(1,1, "KANKER DATE", "OK","ok", "OKEE", 10000 ));
+
+
     }
     @XmlElement
     public List<Movie> getMovies() {
+
         return movies;
     }
 
     public void setMovies(List<Movie> movies) {
+
         this.movies = movies;
     }
+
     public void addMovies(Movie movie){
+
         this.movies.add(movie);
     }
 }

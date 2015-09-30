@@ -1,9 +1,14 @@
 package resources;
 
+import model.Model;
+
+import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * Created by jonathan on 30-9-15.
@@ -12,10 +17,22 @@ import javax.ws.rs.core.MediaType;
 public class UserResource {
 
 
+    @Context
+    ServletContext servletContext;
+
+
+
     @GET
-    @Produces({MediaType.TEXT_PLAIN})
-    public String sayHello() {
-        return "Hello Jersey";
+    @Produces({MediaType.APPLICATION_XML})
+    public Response getUsers(){
+
+        Model model = (Model) servletContext.getAttribute("model");
+
+
+
+        return Response.ok(model.getUsers()).build();
+
+
     }
 
 }

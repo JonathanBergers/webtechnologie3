@@ -1,6 +1,7 @@
 package utils;
 
 import model.Model;
+import model.Movie;
 import model.User;
 import org.omg.IOP.ServiceContextListHelper;
 
@@ -22,6 +23,7 @@ public class ContextListener implements ServletContextListener {
         Model model = new Model();
         for (int i = 0; i < 10; i++) {
             model.users.addUser(new User("adolf" + i, "Adolf" + i, "Hitler"+ i, "Jemoder"));
+            model.movies.addMovies(new Movie(i,i, "KANKER DATE", "OK","ok", "OKEE", 10000+i ));
         }
 
 

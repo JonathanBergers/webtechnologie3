@@ -1,24 +1,27 @@
 package model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Date;
+
 
 /**
  * Created by jonathan on 30-9-15.
  */
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Movie {
 
     private int id;
     private int tt;
 
-    private Date releaseDate;
+    private String releaseDate;
     private String titel;
     private String discription;
     private String director;
     private int length;
 
-    public Movie(int id, int tt, Date releaseDate, String titel, String discription, String director, int length) {
+    public Movie(int id, int tt, String releaseDate, String titel, String discription, String director, int length) {
         this.id = id;
         this.tt = tt;
         this.releaseDate = releaseDate;
@@ -40,7 +43,7 @@ public class Movie {
         return tt;
     }
 
-    public Date getReleaseDate() {
+    public String getReleaseDate() {
         return releaseDate;
     }
 
@@ -68,7 +71,7 @@ public class Movie {
         this.tt = tt;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 

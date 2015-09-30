@@ -7,11 +7,11 @@ import javax.ws.rs.ApplicationPath;
 /**
  * Created by jonathan on 30-9-15.
  */
-@ApplicationPath("notflix")
-public class RestConfig extends ResourceConfig {
+@ApplicationPath("api")
+public class RESTConfig extends ResourceConfig {
 
-
-    public RestConfig() {
+    public RESTConfig() {
+        super();
         System.out.println("niks");
         packages("resources");
     }

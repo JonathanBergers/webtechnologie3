@@ -4,7 +4,35 @@
   <artifactId>Notflix</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>javax.ws.rs-api</artifactId>
+      <version>2.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.glassfish.jersey.containers</groupId>
+      <artifactId>jersey-container-servlet</artifactId>
+      <version>2.22</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- if you are using Jersey client specific features without the server side -->
+    <dependency>
+      <groupId>org.glassfish.jersey.core</groupId>
+      <artifactId>jersey-client</artifactId>
+      <version>2.22</version>
+      <scope>provided</scope>
+    </dependency>
+
+  </dependencies>
+
+
   <build>
+
     <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
@@ -23,6 +51,9 @@
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
       </plugin>
+
+
     </plugins>
+
   </build>
 </project>

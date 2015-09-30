@@ -12,6 +12,7 @@ public class RestConfig extends ResourceConfig {
 
 
     public RestConfig() {
+        System.out.println("niks");
         packages("resources");
     }
 }

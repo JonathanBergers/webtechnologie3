@@ -17,7 +17,7 @@ import java.net.URI;
  * Created by falco on 30-9-15.
  */
 @Path("/movies")
-public class MovieResoursce {
+public class MovieResource {
 
     @Context
     ServletContext servletContext;

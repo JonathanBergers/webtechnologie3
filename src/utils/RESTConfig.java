@@ -12,7 +12,8 @@ public class RESTConfig extends ResourceConfig {
 
     public RESTConfig() {
         super();
-        System.out.println("niks");
+        register(com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider.class);
         packages("resources");
+
     }
 }

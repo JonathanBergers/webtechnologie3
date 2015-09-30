@@ -30,7 +30,7 @@ public class UserResource {
 
 
 
-        return Response.ok(model.getUsers()).build();
+        return Response.ok(model.users).build();
 
 
     }

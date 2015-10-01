@@ -12,14 +12,35 @@ import java.util.List;
 @XmlRootElement
 public class Model {
 
-    public Movies movies;
-
-    public Users users;
-
     public Model() {
-        this.users = new Users();
-        this.movies = new Movies();
+
     }
+
+    private ArrayList<User> users = new ArrayList<>();
+    private ArrayList<Movie> movies = new ArrayList<>();
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public ArrayList<Movie> getMovies() {
+        return movies;
+    }
+
+
+    public void addUser(final User u){
+        users.add(u);
+    }
+
+    public void addMovie(final Movie m){
+        movies.add(m);
+    }
+
+
+
+
+
+
 
 }
 

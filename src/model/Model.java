@@ -65,6 +65,15 @@ public class Model {
         }
         return usersWithNickname;
     }
+    public ArrayList<Movie> getMoviesByTitle(final String title){
+        ArrayList<Movie> r = new ArrayList<>();
+        for(Movie m : getMovies()){
+            if(m.getTitel().toLowerCase().contains(title.toLowerCase())){
+                r.add(m);
+            }
+        }
+        return r;
+    }
 
 
 

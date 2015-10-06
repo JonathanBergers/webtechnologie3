@@ -4,9 +4,7 @@ import model.Model;
 import model.Movie;
 
 import javax.servlet.ServletContext;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -24,11 +22,15 @@ public class MovieResource {
 
 
 
-
     @GET
-    @Produces({MediaType.APPLICATION_XML})
-    public ArrayList<Movie> getMovies(){
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public ArrayList<Movie> getMovies(@QueryParam("title") String title){
         Model model = (Model) servletContext.getAttribute("model");
-        return model.getMovies();
+        if(title == null){
+            return model.getMovies();
+        }
+
+        return model.getMoviesByTitle(title);
     }
+
 }

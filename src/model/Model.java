@@ -63,6 +63,10 @@ public class Model {
                 usersWithNickname.add(u);
             }
         }
+
+
+
+
         return usersWithNickname;
     }
     public ArrayList<Movie> getMoviesByTitle(final String title){

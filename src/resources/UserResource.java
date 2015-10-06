@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 /**
  * Created by jonathan on 30-9-15.
@@ -38,7 +39,15 @@ public class UserResource {
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public ArrayList<User> getUserByNickName( @QueryParam("nickname") final String nickname){
 
+        Enumeration<String> parameterNames = request.getParameterNames();
+        while(parameterNames.hasMoreElements()){
 
+            String s = parameterNames.nextElement();
+            System.out.println(s);
+            System.out.println(request.getParameter(s));
+
+
+        }
 
 
         System.out.println(nickname);

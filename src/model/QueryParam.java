@@ -17,9 +17,9 @@ public class QueryParam {
         return name;
     }
 
-    public String getValue() {
-        return value;
-    }
+
+
+
 }
 
 

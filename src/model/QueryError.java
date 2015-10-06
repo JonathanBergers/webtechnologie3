@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -9,11 +10,13 @@ public class QueryError<T> implements Error{
 
 
     private final QueryParam queryParam;
-    private final T object;
 
-    public QueryError(final QueryParam queryParam, final T object) {
+    private final Class<T> compareClass;
 
-        this.object = object;
+
+
+    public QueryError(Class<T> compareClass, final QueryParam queryParam) {
+        this.compareClass = compareClass;
         this.queryParam = queryParam;
     }
 
@@ -21,7 +24,7 @@ public class QueryError<T> implements Error{
     @Override
     public String getReason() {
 
-        return "the object: "+ object.getClass().getSimpleName() + " doesn't have a field with name: " + queryParam.getName();
+        return "the object: "+ compareClass.getSimpleName() + " doesn't have a field with name: " + queryParam.getName();
     }
 
     @Override

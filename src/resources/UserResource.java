@@ -1,6 +1,9 @@
 package resources;
 
 import com.sun.deploy.net.HttpRequest;
+import matching.Matcher;
+import matching.QueryParameter;
+import matching.QueryResult;
 import model.Model;
 import model.User;
 
@@ -11,6 +14,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.StreamingOutput;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.ArrayList;
@@ -40,26 +44,32 @@ public class UserResource {
     public ArrayList<User> getUserByNickName( @QueryParam("nickname") final String nickname){
 
         Enumeration<String> parameterNames = request.getParameterNames();
+        ArrayList<QueryParameter<?>> parameters = new ArrayList<QueryParameter<?>>();
+
         while(parameterNames.hasMoreElements()){
 
-            String s = parameterNames.nextElement();
-            System.out.println(s);
-            System.out.println(request.getParameter(s));
 
+            String parameterName = parameterNames.nextElement();
+            System.out.println(parameterName);
+            String parameterValue = request.getParameter(parameterName);
+            QueryParameter<String> queryParam = new QueryParameter<String>(parameterName, parameterValue);
+            parameters.add(queryParam);
 
         }
+
+
+
+
 
 
         System.out.println(nickname);
 
         Model model = (Model) servletContext.getAttribute("model");
+        QueryResult<User> queryResult = new Matcher<>(User.class).getResult(parameters, model.getUsers());
 
-        if(nickname == null){
-            return model.getUsers();
-        }
 
-        return null;
 
+       return queryResult.getResults();
 
     }
 

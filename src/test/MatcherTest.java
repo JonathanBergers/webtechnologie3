@@ -1,7 +1,7 @@
 package test;
 
 import matching.Matcher;
-import matching.QueryParam;
+import matching.QueryParameter;
 import matching.QueryResult;
 import org.junit.Test;
 
@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -31,12 +32,12 @@ public class MatcherTest {
 
 
         // maak een paar query parameters
-        ArrayList<QueryParam> queryParams = new ArrayList<>();
+        ArrayList<QueryParameter> queryParameters = new ArrayList<>();
         // goede qparameter
-        queryParams.add(new QueryParam<String>("name", "jo"));
+        queryParameters.add(new QueryParameter<String>("name", "jo"));
 
         // slechte queryparameter
-        queryParams.add(new QueryParam<String>("invalid field", "invalid value"));
+        queryParameters.add(new QueryParameter<String>("invalid field", "invalid value"));
 
 
         // maak een lijst met test objecten om te filteren.
@@ -51,15 +52,18 @@ public class MatcherTest {
 
 
         // een query om op te matchen
-        QueryParam<String> qp = new QueryParam<String>("name", "CORRECT");
+        QueryParameter<String> qp = new QueryParameter<String>("name", "CORRECT");
 
-        QueryResult result = testObjectMatcher.getResult(qp, testObjects);
+        QueryResult<TestObject> result = testObjectMatcher.getResult(qp, testObjects);
 
         assertThat(result.getResults().size(), is(10));
         assertThat(result.getErrors().size(), is(0));
 
 
 
+        for(TestObject t: result.getResults()){
+            assertTrue(t.getName().equals("CORRECT"));
+        }
 
 
 
@@ -79,13 +83,13 @@ public class MatcherTest {
 
 
         // maak een paar query parameters
-        ArrayList<QueryParam> queryParams = new ArrayList<>();
+        ArrayList<QueryParameter<?>> queryParameters = new ArrayList<>();
         // goede qparameter
-        QueryParam<String> q = new QueryParam("name", "jo");
-        queryParams.add(q);
+        QueryParameter<String> q = new QueryParameter("name", "jo");
+        queryParameters.add(q);
 
         // slechte queryparameter
-        queryParams.add(new QueryParam("invalid field", "invalid value"));
+        queryParameters.add(new QueryParameter("invalid field", "invalid value"));
 
 
         // maak een nieuw test object om mee te matchen
@@ -93,11 +97,13 @@ public class MatcherTest {
 
         // kijk of de query parameters overeenkomen met de attributen van het testobject.
         // als het goed is zal er maar een item in de map moeten zitten en zal er een error in de matcher zijn
-        HashMap<QueryParam, Method> methodParamMap = testObjectMatcher.getValidQueries(new HashMap<QueryParam, Method>(), queryParams);
+        HashMap<QueryParameter, Method> methodParamMap = testObjectMatcher.getValidQueries(new HashMap<QueryParameter, Method>(), queryParameters);
 
 
         assertThat(methodParamMap.size(), is(1));
         assertThat(testObjectMatcher.getErrors().size(), is(1));
+
+
 
 
     }
@@ -113,12 +119,12 @@ public class MatcherTest {
 
 
         // maak een paar query parameters
-        ArrayList<QueryParam> queryParams = new ArrayList<>();
+        ArrayList<QueryParameter<?>> queryParameters = new ArrayList<>();
         // goede qparameter
-        queryParams.add(new QueryParam<String>("name", "jo"));
+        queryParameters.add(new QueryParameter<String>("name", "jo"));
 
         // slechte queryparameter
-        queryParams.add(new QueryParam<String>("invalid field", "invalid value"));
+        queryParameters.add(new QueryParameter<String>("invalid field", "invalid value"));
 
 
         // maak een nieuw test object om mee te matchen
@@ -128,7 +134,7 @@ public class MatcherTest {
         // kijk of de query parameters overeenkomen met de attributen van het testobject.
         // als het goed is zal er maar een item in de map moeten zitten en zal er een error in de matcher zijn
         // het testObject wordt niet meegenomen omdat de matcher alleen maar op strings of integers kan matchen
-        HashMap<QueryParam, Method> methodParamMap = testObjectMatcher.getValidQueries(new HashMap<QueryParam, Method>(), queryParams);
+        HashMap<QueryParameter, Method> methodParamMap = testObjectMatcher.getValidQueries(new HashMap<QueryParameter, Method>(), queryParameters);
 
 
         assertThat(methodParamMap.size(), is(1));
@@ -148,12 +154,12 @@ public class MatcherTest {
 
 
         // maak een paar query parameters
-        ArrayList<QueryParam> queryParams = new ArrayList<>();
+        ArrayList<QueryParameter<?>> queryParameters = new ArrayList<>();
         // goede qparameter
-        queryParams.add(new QueryParam<String>("name", "jo"));
+        queryParameters.add(new QueryParameter<String>("name", "jo"));
 
         // slechte queryparameter
-        queryParams.add(new QueryParam<String>("invalid field", "invalid value"));
+        queryParameters.add(new QueryParameter<String>("invalid field", "invalid value"));
 
 
         // maak een nieuw test object om mee te matchen
@@ -163,7 +169,7 @@ public class MatcherTest {
         // kijk of de query parameters overeenkomen met de attributen van het testobject.
         // als het goed is zal er maar een item in de map moeten zitten en zal er een error in de matcher zijn
         // het testObject wordt niet meegenomen omdat de matcher alleen maar op strings of integers kan matchen
-        HashMap<QueryParam, Method> methodParamMap = testObjectMatcher.getValidQueries(new HashMap<QueryParam, Method>(), queryParams);
+        HashMap<QueryParameter, Method> methodParamMap = testObjectMatcher.getValidQueries(new HashMap<QueryParameter, Method>(), queryParameters);
 
         try {
             testObjectMatcher.match(testObject2, methodParamMap);

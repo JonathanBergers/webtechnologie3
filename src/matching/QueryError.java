@@ -6,15 +6,15 @@ package matching;
 public class QueryError<T> extends matching.Error {
 
 
-    private final QueryParam queryParam;
+    private final QueryParameter queryParameter;
 
     private final Class<T> compareClass;
 
 
 
-    public QueryError(Class<T> compareClass, final QueryParam queryParam) {
+    public QueryError(Class<T> compareClass, final QueryParameter queryParameter) {
         this.compareClass = compareClass;
-        this.queryParam = queryParam;
+        this.queryParameter = queryParameter;
     }
 
 
@@ -22,6 +22,6 @@ public class QueryError<T> extends matching.Error {
 
     @Override
     public String toString() {
-        return "the object: "+ compareClass.getSimpleName() + " doesn't have a field with name: " + queryParam.getName();
+        return "the object: "+ compareClass.getSimpleName() + " doesn't have a field with name: " + queryParameter.getName();
     }
 }

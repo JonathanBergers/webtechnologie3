@@ -29,24 +29,25 @@ public class Matcher<T> {
     }
 
 
-    public QueryResult<T> getResult(QueryParam queryParam, ArrayList<T> items){
+    public QueryResult<T> getResult(QueryParameter<?> queryParameter, ArrayList<T> items){
 
-        ArrayList<QueryParam> queryParams = new ArrayList<>();
-        queryParams.add(queryParam);
+        ArrayList<QueryParameter<?>> queryParameters = new ArrayList<>();
+        queryParameters.add(queryParameter);
 
-        return getResult(queryParams, items);
+        return getResult(queryParameters, items);
 
     }
 
-    public QueryResult<T> getResult(ArrayList<QueryParam> queryParams, ArrayList<T> items){
+    public QueryResult<T> getResult(ArrayList<QueryParameter<?>> queryParameters, ArrayList<T> items){
 
-        HashMap<QueryParam, Method> methodParamMap = getValidQueries(new HashMap<QueryParam, Method>(), queryParams);
+        HashMap<QueryParameter, Method> methodParamMap = getValidQueries(new HashMap<QueryParameter, Method>(), queryParameters);
 
+        ArrayList<T> itemsForResult= new ArrayList<>();
         for(T item: items){
 
             try {
-                if(!match(item, methodParamMap)){
-                    items.remove(item);
+                if(match(item, methodParamMap)){
+                    itemsForResult.add(item);
                 }
             } catch (InvocationTargetException e) {
                 System.out.println("TERROR ERROR");
@@ -59,7 +60,8 @@ public class Matcher<T> {
         }
 
 
-        return new QueryResult<T>(items, errors);
+
+        return new QueryResult<T>(itemsForResult, errors);
 
     }
 
@@ -72,14 +74,14 @@ public class Matcher<T> {
      * @throws InvocationTargetException
      * @throws IllegalAccessException
      */
-    public boolean match(T item, HashMap<QueryParam, Method> methodParamMap) throws InvocationTargetException, IllegalAccessException {
+    public boolean match(T item, HashMap<QueryParameter, Method> methodParamMap) throws InvocationTargetException, IllegalAccessException {
 
 
 
-        Set<QueryParam> queryParamsList = methodParamMap.keySet();
+        Set<QueryParameter> queryParamsList = methodParamMap.keySet();
 
 
-        for(QueryParam q: queryParamsList){
+        for(QueryParameter q: queryParamsList){
 
             Method m = methodParamMap.get(q);
 
@@ -118,18 +120,18 @@ public class Matcher<T> {
      * Deze methode zorgt ervoor dat de queries gematched worden met de methode, als een methode een queryname niet heeft wordt er een error toegevoegd aan de lijst met errors
      * recursief
      *
-     * @param queryParams
+     * @param queryParameters
      * @return
      */
-    public HashMap<QueryParam, Method> getValidQueries(HashMap<QueryParam, Method> methodMap, ArrayList<QueryParam> queryParams) {
+    public HashMap<QueryParameter, Method> getValidQueries(HashMap<QueryParameter, Method> methodMap, ArrayList<QueryParameter<?>> queryParameters) {
 
 
-        if (queryParams.isEmpty()) {
+        if (queryParameters.isEmpty()) {
 
             return methodMap;
         }
 
-        QueryParam qp = queryParams.remove(0);
+        QueryParameter qp = queryParameters.remove(0);
 
         boolean error = true;
         for (Method m : compareClass.getMethods()) {
@@ -158,7 +160,7 @@ public class Matcher<T> {
 
         }
 
-        getValidQueries(methodMap, queryParams);
+        getValidQueries(methodMap, queryParameters);
 
         return methodMap;
 

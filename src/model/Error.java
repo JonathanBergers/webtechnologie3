@@ -5,12 +5,9 @@ import java.util.ArrayList;
 /**
  * Created by jonathan on 6-10-15.
  */
-public interface Error {
+public abstract class Error {
 
 
-     public String getReason();
-
-
-    public String toString();
+    public abstract String toString();
 
 }

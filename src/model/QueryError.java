@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * Created by jonathan on 6-10-15.
  */
-public class QueryError<T> implements Error{
+public class QueryError<T> extends Error{
 
 
     private final QueryParam queryParam;
@@ -21,14 +21,10 @@ public class QueryError<T> implements Error{
     }
 
 
-    @Override
-    public String getReason() {
 
-        return "the object: "+ compareClass.getSimpleName() + " doesn't have a field with name: " + queryParam.getName();
-    }
 
     @Override
     public String toString() {
-        return getReason();
+        return "the object: "+ compareClass.getSimpleName() + " doesn't have a field with name: " + queryParam.getName();
     }
 }

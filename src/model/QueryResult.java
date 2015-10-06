@@ -10,9 +10,9 @@ public class QueryResult<T> {
 
     private ArrayList<T> results = new ArrayList<>();
 
-    private ArrayList<QueryError<T>> errors = new ArrayList<>();
+    private ArrayList<Error> errors = new ArrayList<>();
 
-    public QueryResult(ArrayList<T> results, ArrayList<QueryError<T>> errors) {
+    public QueryResult(ArrayList<T> results, ArrayList<Error> errors) {
         this.results = results;
         this.errors = errors;
     }

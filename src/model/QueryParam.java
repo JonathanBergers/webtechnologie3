@@ -3,12 +3,13 @@ package model;
 /**
  * Created by jonathan on 6-10-15.
  */
-public class QueryParam {
+public class QueryParam<T> {
 
-    private final String name, value;
+    private final String name;
+    private final T value;
 
 
-    public QueryParam(String name, String value) {
+    public QueryParam(String name, T value) {
         this.name = name;
         this.value = value;
     }
@@ -17,9 +18,9 @@ public class QueryParam {
         return name;
     }
 
-
-
-
+    public T getValue() {
+        return value;
+    }
 }
 
 

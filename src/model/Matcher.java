@@ -29,13 +29,45 @@ public class Matcher<T> {
     }
 
 
+    public QueryResult<T> getResult(ArrayList<QueryParam> queryParams){
 
-    public boolean match(T item, ArrayList<QueryParam> queryParams) throws InvocationTargetException, IllegalAccessException {
+        HashMap<QueryParam, Method> methodParamMap = getValidQueries(new HashMap<QueryParam, Method>(), queryParams);
 
-        HashMap<QueryParam, Method> methodParamMap = getValidQueries(new HashMap<>(), queryParams);
+        for(T item: items){
+
+            try {
+                if(!match(item, methodParamMap)){
+                    items.remove(item);
+                }
+            } catch (InvocationTargetException e) {
+                System.out.println("TERROR ERROR");
+
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        return new QueryResult<T>(items, errors);
+
+    }
+
+
+
+    /**kijkt of een item dezelfde waarden heeft als de waarde van de parameters
+     *
+     * @param item
+     * @return methodParameterMap, de map met daarin de query params en methoden om mee te valideren.
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
+    public boolean match(T item, HashMap<QueryParam, Method> methodParamMap) throws InvocationTargetException, IllegalAccessException {
+
 
 
         Set<QueryParam> queryParamsList = methodParamMap.keySet();
+
 
         for(QueryParam q: queryParamsList){
 
@@ -43,9 +75,26 @@ public class Matcher<T> {
 
             Object o = m.invoke(item);
 
-            if(o instanceof )
+            // kijken of de typen wel hetzelfde zijn
+            if(o.getClass().equals(q.getValue().getClass())){
+
+                // waarden zijn niet hetzelfde
+                if(!o.equals(q.getValue())){
+                    return false;
+
+                }
+
+            }else{
+                assert false: "typen moeten hetzelfde zijn";
+            }
+
+
+
+
+
 
         }
+        return true;
 
 
     }
@@ -75,15 +124,15 @@ public class Matcher<T> {
             if (("get" + qp.getName().toLowerCase()).equals(m.getName().toLowerCase())) {
 
                 //alleen int of Strings voor deze matcher
-                switch (m.getReturnType()){
+                if(m.getReturnType().equals(String.class) || m.getReturnType().equals(Integer.class)){
+                    error = false;
+                    methodMap.put(qp, m);
+                    break;
 
-                    //case String.class:
                 }
 
 
-                error = false;
-                methodMap.put(qp, m);
-                break;
+
             }
 
         }

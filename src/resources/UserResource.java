@@ -4,9 +4,7 @@ import model.Model;
 import model.User;
 
 import javax.servlet.ServletContext;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -37,16 +35,22 @@ public class UserResource {
 
     }
 
-    @Path("/jo")
+
     @GET
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public User getUser(){
+    public User getUserByNickName( @QueryParam("nickname") final String nickname){
+
+
+        System.out.println(nickname);
 
         Model model = (Model) servletContext.getAttribute("model");
-        return model.getUsers().get(0);
+        return model.getUserByNickName(nickname);
 
 
     }
+
+
+
 
 
 

@@ -39,6 +39,29 @@ public class Model {
 
 
 
+    public User getUserByFirstName(final String firstName){
+
+        for(User u : getUsers()){
+            if(u.hasFirstName(firstName)){
+                return u;
+            }
+        }
+        return null;
+    }
+
+    public User getUserByNickName(final String nickName){
+
+        for(User u : getUsers()){
+            if(u.hasFirstName(nickName)){
+                return u;
+            }
+        }
+        return null;
+    }
+
+
+
+
 
 
 

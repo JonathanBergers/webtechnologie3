@@ -1,13 +1,14 @@
 package test;
 
-import model.*;
+import matching.Matcher;
+import matching.QueryParam;
+import matching.QueryResult;
 import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.TreeMap;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

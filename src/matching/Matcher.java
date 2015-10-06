@@ -1,14 +1,14 @@
-package model;
+package matching;
 
-import javax.persistence.Query;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 
 /**
+ * Deze matcher kan een lijst filteren op basis van meegegeven queryparameters
+ * de matcher gebruikt reflection om de attributen te comparen met de queryparameters
  * Created by jonathan on 6-10-15.
  */
 public class Matcher<T> {

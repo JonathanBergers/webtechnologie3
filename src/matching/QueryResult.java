@@ -1,4 +1,7 @@
-package model;
+package matching;
+
+import matching.Error;
+import matching.QueryError;
 
 import java.util.ArrayList;
 
@@ -10,7 +13,7 @@ public class QueryResult<T> {
 
     private ArrayList<T> results = new ArrayList<>();
 
-    private ArrayList<Error> errors = new ArrayList<>();
+    private ArrayList<matching.Error> errors = new ArrayList<>();
 
     public QueryResult(ArrayList<T> results, ArrayList<Error> errors) {
         this.results = results;

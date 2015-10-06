@@ -1,4 +1,4 @@
-package model;
+package matching;
 
 /**
  * Created by jonathan on 6-10-15.

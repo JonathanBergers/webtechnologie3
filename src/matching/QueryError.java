@@ -1,12 +1,9 @@
-package model;
-
-import java.util.ArrayList;
-import java.util.Objects;
+package matching;
 
 /**
  * Created by jonathan on 6-10-15.
  */
-public class QueryError<T> extends Error{
+public class QueryError<T> extends matching.Error {
 
 
     private final QueryParam queryParam;

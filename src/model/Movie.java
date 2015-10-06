@@ -1,15 +1,18 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 
 /**
  * Created by jonathan on 30-9-15.
  */
 @XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 public class Movie {
 
     private int id;
@@ -34,7 +37,8 @@ public class Movie {
     public Movie() {
 
     }
-
+    @JsonIgnore
+    @XmlTransient
     public int getId() {
         return id;
     }
@@ -90,4 +94,8 @@ public class Movie {
     public void setLength(int length) {
         this.length = length;
     }
+
+
+
+
 }

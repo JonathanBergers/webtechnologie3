@@ -1,9 +1,12 @@
 package resources;
 
+import com.sun.deploy.net.HttpRequest;
 import model.Model;
 import model.User;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -24,30 +27,34 @@ public class UserResource {
 
 
 
-
-    @GET
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public ArrayList<User> getUsers(){
-
-        Model model = (Model) servletContext.getAttribute("model");
-        return model.getUsers();
+    @Context
+    HttpServletRequest request;
 
 
-    }
+
 
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public User getUserByNickName( @QueryParam("nickname") final String nickname){
+    public ArrayList<User> getUserByNickName( @QueryParam("nickname") final String nickname){
+
+
 
 
         System.out.println(nickname);
 
         Model model = (Model) servletContext.getAttribute("model");
-        return model.getUserByNickName(nickname);
+
+        if(nickname == null){
+            return model.getUsers();
+        }
+
+        return null;
 
 
     }
+
+
 
 
 

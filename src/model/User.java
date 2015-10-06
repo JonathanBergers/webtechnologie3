@@ -103,18 +103,12 @@ public class User {
 
     public boolean hasFirstName(final String name){
 
-        if(getFirstname().equals(name)){
-            return true;
-        }
-        return false;
+        return getFirstname().equals(name);
     }
 
     public boolean hasNickName(final String nickName){
 
-        if(getNickname().equals(nickName)){
-            return true;
-        }
-        return false;
+        return getNickname().equals(nickName);
     }
 
 }

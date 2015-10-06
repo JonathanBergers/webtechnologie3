@@ -1,5 +1,8 @@
 package model;
 
+import com.sun.deploy.util.ArrayUtil;
+import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader;
+
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.*;
@@ -39,24 +42,28 @@ public class Model {
 
 
 
-    public User getUserByFirstName(final String firstName){
+    public ArrayList<User>getUserByFirstname(final String firstName){
+
+        ArrayList<User> usersWithNickname = new ArrayList<>();
 
         for(User u : getUsers()){
             if(u.hasFirstName(firstName)){
-                return u;
+                usersWithNickname.add(u);
             }
         }
-        return null;
+        return usersWithNickname;
     }
 
-    public User getUserByNickName(final String nickName){
+    public ArrayList<User>getUserByNickName(final String nickName){
+
+        ArrayList<User> usersWithNickname = new ArrayList<>();
 
         for(User u : getUsers()){
-            if(u.hasFirstName(nickName)){
-                return u;
+            if(u.hasNickName(nickName)){
+                usersWithNickname.add(u);
             }
         }
-        return null;
+        return usersWithNickname;
     }
 
 

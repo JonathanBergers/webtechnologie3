@@ -1,30 +1,28 @@
 package resources;
 
-import com.sun.deploy.net.HttpRequest;
 import matching.Matcher;
 import matching.QueryParameter;
 import matching.QueryResult;
 import model.Model;
 import model.User;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.StreamingOutput;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 /**
- * Created by jonathan on 30-9-15.
+ * Created by jonathan on 6-10-15.
  */
-@Path("/users")
-public class UserResource {
+public abstract class BaseResource<T> {
+
 
 
     @Context
@@ -35,13 +33,14 @@ public class UserResource {
     @Context
     HttpServletRequest request;
 
+    protected abstract Class getResourceClass();
 
-
+    protected abstract ArrayList<T> getAllResources();
 
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public ArrayList<User> getUserByNickName( @QueryParam("nickname") final String nickname){
+    public ArrayList<T> getResource(){
 
         Enumeration<String> parameterNames = request.getParameterNames();
         ArrayList<QueryParameter<?>> parameters = new ArrayList<QueryParameter<?>>();
@@ -57,23 +56,14 @@ public class UserResource {
 
         }
 
-        System.out.println(nickname);
 
-        Model model = (Model) servletContext.getAttribute("model");
-        QueryResult<User> queryResult = new Matcher<>(User.class).getResult(parameters, model.getUsers());
+        QueryResult<T> queryResult = new Matcher<>(getResourceClass()).getResult(parameters, getAllResources());
 
 
 
-       return queryResult.getResults();
+        return queryResult.getResults();
 
     }
-
-
-
-
-
-
-
 
 
 }

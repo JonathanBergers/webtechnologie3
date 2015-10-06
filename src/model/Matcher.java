@@ -1,5 +1,6 @@
 package model;
 
+import javax.persistence.Query;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -13,7 +14,6 @@ import java.util.Set;
 public class Matcher<T> {
 
 
-    private ArrayList<T> items;
     private final Class<T> compareClass;
 
     private ArrayList<Error> errors = new ArrayList<>();
@@ -29,7 +29,16 @@ public class Matcher<T> {
     }
 
 
-    public QueryResult<T> getResult(ArrayList<QueryParam> queryParams){
+    public QueryResult<T> getResult(QueryParam queryParam, ArrayList<T> items){
+
+        ArrayList<QueryParam> queryParams = new ArrayList<>();
+        queryParams.add(queryParam);
+
+        return getResult(queryParams, items);
+
+    }
+
+    public QueryResult<T> getResult(ArrayList<QueryParam> queryParams, ArrayList<T> items){
 
         HashMap<QueryParam, Method> methodParamMap = getValidQueries(new HashMap<QueryParam, Method>(), queryParams);
 
@@ -44,6 +53,7 @@ public class Matcher<T> {
 
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
+                System.out.println("TERROR ERROR2");
                 e.printStackTrace();
             }
         }
@@ -72,6 +82,10 @@ public class Matcher<T> {
         for(QueryParam q: queryParamsList){
 
             Method m = methodParamMap.get(q);
+
+            System.out.println(item.toString());
+            System.out.println(m.getName());
+            System.out.println(item.getClass().getName());
 
             Object o = m.invoke(item);
 
@@ -118,7 +132,7 @@ public class Matcher<T> {
         QueryParam qp = queryParams.remove(0);
 
         boolean error = true;
-        for (Method m : compareClass.getClass().getMethods()) {
+        for (Method m : compareClass.getMethods()) {
 
             // object heeft een getter met voor met de naam van de query
             if (("get" + qp.getName().toLowerCase()).equals(m.getName().toLowerCase())) {

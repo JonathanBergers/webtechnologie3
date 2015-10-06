@@ -13,7 +13,7 @@ public class Oefening {
 
 
     public static void main(String[] args) {
-//        new Oefening().niks();
+        new Oefening().niks();
     }
 
     public class Foo<T> {
@@ -33,26 +33,25 @@ public class Oefening {
         }
 
     }
-//
-//
-//    public void niks() {
-//
-//
-//        Foo f = new Foo(12);
-//
-//
-//        ArrayList<QueryParam> queryParams = new ArrayList<>();
-//        queryParams.add(new QueryParam("name", "jo"));
-//        queryParams.add(new QueryParam("Geen field", "niks"));
-//        QueryParam q = new QueryParam("name", "jo");
-//
-//        ArrayList<QueryError<Foo>> errors = checkErrors(new ArrayList<QueryError<Foo>>(), queryParams, f);
-//
-//
-//        System.out.println(errors.toString());
-//
-//
-//    }
+
+
+    public void niks() {
+
+
+        Foo f = new Foo(12);
+
+
+        ArrayList<QueryParam> queryParams = new ArrayList<>();
+        queryParams.add(new QueryParam("name", "jo"));
+        queryParams.add(new QueryParam("Geen field", "niks"));
+        QueryParam q = new QueryParam("name", "jo");
+
+        hasValue(f);
+
+
+
+
+    }
 
 //
 //    /**
@@ -99,63 +98,63 @@ public class Oefening {
 //
 //    }
 
-//
-//    private void hasValue(Object object, QueryParam... queryParams) {
-//
-//
-//        ArrayList<Foo> items = new ArrayList<>();
-//        items.add(new Foo<String>("jonathan"));
-//        items.add(new Foo<String>("bergers"));
-//
-//
-//        ArrayList<QueryParam> queryParams = new ArrayList<>();
-//        queryParams.add(new QueryParam("name", "jo"));
-//        queryParams.add(new QueryParam("Geen field", "niks"));
-//        QueryParam q = new QueryParam("name", "jo");
-//
-//
-//        // kijken of het object wel de attributen heeft van de query
-//
-//        // even een arraylist maken voor contains
-//        ArrayList<Field> fields = new ArrayList<>();
-//
-//        Collections.addAll(fields, object.getClass().getFields());
-//
-//
-//        for (Method m : object.getClass().getMethods()) {
-//
-//
-//            if (m.getName().toLowerCase().equals("get" + q.getName().toLowerCase())) {
-//
-//                try {
-//
-//                    Object o = m.invoke(object);
-//
-//                    if (o instanceof String) {
-//
-//                        String s = (String) o;
-//                        System.out.println(s);
-//
-//                    }
-//
-//                    if (o instanceof Integer) {
-//
-//                        int s = (int) o;
-//                        System.out.println(s);
-//                    }
-//
-//
-//                } catch (IllegalAccessException e) {
-//                    e.printStackTrace();
-//                } catch (InvocationTargetException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//        }
-//
-//
-//    }
+
+    private void hasValue(Object object) {
+
+
+        ArrayList<Foo> items = new ArrayList<>();
+        items.add(new Foo<String>("jonathan"));
+        items.add(new Foo<String>("bergers"));
+
+
+        ArrayList<QueryParam> queryParams = new ArrayList<>();
+        queryParams.add(new QueryParam("name", "jo"));
+        queryParams.add(new QueryParam("Geen field", "niks"));
+        QueryParam q = new QueryParam("name", "jo");
+
+
+        // kijken of het object wel de attributen heeft van de query
+
+        // even een arraylist maken voor contains
+        ArrayList<Field> fields = new ArrayList<>();
+
+        Collections.addAll(fields, object.getClass().getFields());
+
+
+        for (Method m : object.getClass().getMethods()) {
+
+
+            if (m.getName().toLowerCase().equals("get" + q.getName().toLowerCase())) {
+
+                try {
+
+                    Object o = m.invoke(object);
+
+                    if (o instanceof String) {
+
+                        String s = (String) o;
+                        System.out.println(s);
+
+                    }
+
+                    if (o instanceof Integer) {
+
+                        int s = (int) o;
+                        System.out.println(s);
+                    }
+
+
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+
+
+    }
 
 
 

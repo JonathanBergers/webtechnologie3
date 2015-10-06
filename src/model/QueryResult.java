@@ -27,4 +27,11 @@ public class QueryResult<T> {
         results.add(result);
     }
 
+    public ArrayList<T> getResults() {
+        return results;
+    }
+
+    public ArrayList<Error> getErrors() {
+        return errors;
+    }
 }

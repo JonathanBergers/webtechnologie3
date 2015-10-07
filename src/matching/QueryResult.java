@@ -1,8 +1,11 @@
 package matching;
 
+import com.sun.xml.txw2.annotation.XmlElement;
 import matching.Error;
 import matching.QueryError;
 
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 
 /**
@@ -30,11 +33,20 @@ public class QueryResult<T> {
         results.add(result);
     }
 
+
     public ArrayList<T> getResults() {
         return results;
     }
 
     public ArrayList<Error> getErrors() {
         return errors;
+    }
+
+    public void setResults(ArrayList<T> results) {
+        this.results = results;
+    }
+
+    public void setErrors(ArrayList<Error> errors) {
+        this.errors = errors;
     }
 }

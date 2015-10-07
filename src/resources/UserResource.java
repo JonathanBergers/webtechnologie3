@@ -41,7 +41,7 @@ public class UserResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public ArrayList<User> getUserByNickName( @QueryParam("nickname") final String nickname){
+    public QueryResult<User> getUserByNickName( @QueryParam("nickname") final String nickname){
 
         Enumeration<String> parameterNames = request.getParameterNames();
         ArrayList<QueryParameter<?>> parameters = new ArrayList<QueryParameter<?>>();
@@ -64,7 +64,7 @@ public class UserResource {
 
 
 
-       return queryResult.getResults();
+       return queryResult;
 
     }
 

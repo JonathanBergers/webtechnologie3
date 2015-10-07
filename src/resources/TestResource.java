@@ -3,7 +3,10 @@ package resources;
 import model.Model;
 import test.TestObject;
 
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 
 /**
@@ -13,13 +16,12 @@ import java.util.ArrayList;
 public class TestResource extends BaseResource<TestObject> {
 
 
-    @Override
-    protected Class getResourceClass() {
-        return TestObject.class;
-    }
+    @GET
+    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public ArrayList<TestObject> getTestObjects(){
 
-    @Override
-    protected ArrayList<TestObject> getAllResources() {
+        Model model = (Model) servletContext.getAttribute("model");
+
 
         // maak een lijst met test objecten om te filteren.
         ArrayList<TestObject> testObjects = new ArrayList<>();
@@ -27,6 +29,9 @@ public class TestResource extends BaseResource<TestObject> {
             testObjects.add(new TestObject("CORRECT"));
             testObjects.add(new TestObject("INCORRECT"));
         }
-        return testObjects;
+
+
+        return getResources(TestObject.class, testObjects);
+
     }
 }

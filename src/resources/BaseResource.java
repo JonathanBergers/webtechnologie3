@@ -33,14 +33,10 @@ public abstract class BaseResource<T> {
     @Context
     HttpServletRequest request;
 
-    protected abstract Class getResourceClass();
-
-    protected abstract ArrayList<T> getAllResources();
 
 
-    @GET
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public ArrayList<T> getResource(){
+
+    public ArrayList<T> getResources(Class classType, ArrayList<T> allItems){
 
         Enumeration<String> parameterNames = request.getParameterNames();
         ArrayList<QueryParameter<?>> parameters = new ArrayList<QueryParameter<?>>();
@@ -57,11 +53,10 @@ public abstract class BaseResource<T> {
         }
 
 
-        QueryResult<T> queryResult = new Matcher<>(getResourceClass()).getResult(parameters, getAllResources());
 
-
-
+        QueryResult<T> queryResult = new Matcher<>(classType).getResult(parameters, allItems);
         return queryResult.getResults();
+
 
     }
 

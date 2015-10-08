@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import java.util.ArrayList;
 
 
 /**
@@ -15,6 +16,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 public class Movie {
 
+    public final static int NOTRATED = -1;
+
     private int id;
     private int tt;
 
@@ -23,6 +26,9 @@ public class Movie {
     private String discription;
     private String director;
     private int length;
+
+    private int overAllRating = NOTRATED;
+    private ArrayList<Rating> ratings =  new ArrayList<>();
 
     public Movie(int id, int tt, String releaseDate, String titel, String discription, String director, int length) {
         this.id = id;
@@ -95,7 +101,51 @@ public class Movie {
         this.length = length;
     }
 
+    @JsonIgnore
+    @XmlTransient
+    public ArrayList<Rating> getRatings() {return ratings;}
 
+    public void setRatings(ArrayList<Rating> ratings) {this.ratings = ratings;}
 
+    public int getOverAllRating() {return overAllRating;}
 
+    public void setOverAllRating(int overAllRating) {overAllRating = overAllRating;}
+
+    public void Rate(int stars, User user){
+        Rating rating = new Rating(stars, user, this);
+        for(Rating r : ratings){
+            if(r.getUser().equals(rating.getUser())){
+                rating.getUser().addRating(rating);
+                r = rating;
+                calculateOverallRating();
+                return;
+            }
+        }
+        rating.getUser().addRating(rating);
+        ratings.add(rating);
+        calculateOverallRating();
+    }
+    private void calculateOverallRating(){
+        if(ratings.size()<3){
+            overAllRating = NOTRATED;
+            return;
+        }
+        int i = 0;
+        int totalStars = 0;
+        for(Rating r: ratings){
+            totalStars+=r.getStars();
+            i++;
+        }
+        overAllRating = Math.round(totalStars/(i+1));
+    }
+    public void deleteRatingFromUser(User user){
+        for (int i = 0; i < ratings.size(); i++) {
+            if(ratings.get(i).getUser().equals(user)){
+                user.deleteRating(ratings.get(i));
+                ratings.remove(i);
+                break;
+            }
+        }
+        calculateOverallRating();
+    }
 }

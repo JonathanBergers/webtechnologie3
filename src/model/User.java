@@ -1,15 +1,18 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import java.util.ArrayList;
 
 /**
  * Created by jonathan on 30-9-15.
  *
- *o Achternaam
+ o Achternaam
  o Tussenvoegsels
  o Voornaam
  o Nickname
@@ -23,6 +26,7 @@ public class User {
 
 
     private String nickname, firstname, lastname, infix, password;
+    private ArrayList<Rating> ratings =  new ArrayList<>();
 
     public User(String nickname, String firstname, String lastname, String infix, String password) {
         this.nickname = nickname;
@@ -109,6 +113,25 @@ public class User {
     public boolean hasNickName(final String nickName){
 
         return getNickname().equals(nickName);
+    }
+
+    @JsonIgnore
+    @XmlTransient
+    public ArrayList<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void addRating(Rating rating) {
+        for(Rating r : ratings){
+            if(r.getMovie().equals(rating.getMovie())){
+                r = rating;
+                return;
+            }
+        }
+        this.ratings.add(rating);
+    }
+    public void deleteRating(Rating rating){
+        ratings.remove(rating);
     }
 
 }

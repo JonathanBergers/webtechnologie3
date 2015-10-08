@@ -2,6 +2,7 @@ package utils;
 
 import model.Model;
 import model.Movie;
+import model.Rating;
 import model.User;
 import org.omg.IOP.ServiceContextListHelper;
 
@@ -28,6 +29,12 @@ public class ContextListener implements ServletContextListener {
 
         }
 
+        //rating test
+        model.getMovies().get(0).Rate(10, model.getUsers().get(0));
+        model.getMovies().get(0).Rate(-4, model.getUsers().get(0));
+        model.getMovies().get(0).Rate(10, model.getUsers().get(1));
+        model.getMovies().get(0).Rate(10, model.getUsers().get(2));
+        model.getMovies().get(0).Rate(7, model.getUsers().get(3));
 
         servletContextEvent.getServletContext().setAttribute("model", model);
 

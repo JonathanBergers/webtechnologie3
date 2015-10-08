@@ -36,6 +36,8 @@ public class ContextListener implements ServletContextListener {
         model.getMovies().get(0).Rate(10, model.getUsers().get(2));
         model.getMovies().get(0).Rate(7, model.getUsers().get(3));
 
+        model.getMovies().get(0).deleteRatingFromUser(model.getUsers().get(0));
+
         servletContextEvent.getServletContext().setAttribute("model", model);
 
 

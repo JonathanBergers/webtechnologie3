@@ -7,19 +7,29 @@ public class AccessToken {
 
 
     private String token;
+    private User user;
 
-    public AccessToken(final User user) {
-        generateToken(user);
+
+    public AccessToken(final User user, int tokenNumber) {
+        this.user = user;
+        generateToken(user, tokenNumber);
     }
 
     public AccessToken() {
     }
 
 
-    private void generateToken(final User user){
+    private void generateToken(final User user, final int tokenNumber){
 
-        token = user.getNickname() + user.getPassword();
+        token = tokenNumber + user.getPassword();
 
+    }
+    public String getToken() {
+        return token;
+    }
+
+    public User getUser() {
+        return user;
     }
 
 

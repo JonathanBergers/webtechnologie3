@@ -18,7 +18,7 @@ public class Model {
     public Model() {
 
     }
-
+    private ArrayList<AccessToken> accessTokens = new ArrayList<>();
     private ArrayList<User> users = new ArrayList<>();
     private ArrayList<Movie> movies = new ArrayList<>();
 
@@ -78,6 +78,44 @@ public class Model {
         }
         return r;
     }
+
+    public AccessToken giveUserAccessToken(User user){
+        AccessToken accessToken = getAccessTokenFromUser(user);
+        if(accessToken == null){
+            accessToken = new AccessToken(user, (accessTokens.size()+1)*12-1);
+            accessTokens.add(accessToken);
+        }
+        return accessToken;
+    }
+    /**
+     *
+     * @param u the user
+     * @return null if no accessToken is assigned to the user of the accessToken of that user
+     */
+    private AccessToken getAccessTokenFromUser(User u){
+        for(AccessToken t : accessTokens){
+            if(t.getUser().equals(u)){
+                return t;
+            }
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @param token the token
+     * @return null if the token is not correct or the user with the given token
+     */
+    public User getUserWithAccessToken(String token){
+        for(AccessToken t : accessTokens){
+            if(t.getToken().equals(token)){
+                return t.getUser();
+            }
+        }
+        return null;
+    }
+
+
 
 
 

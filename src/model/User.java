@@ -134,4 +134,7 @@ public class User {
         ratings.remove(rating);
     }
 
+    public boolean hasPassword(String password){
+        return getPassword().equals(password);
+    }
 }

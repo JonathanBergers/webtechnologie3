@@ -1,31 +1,26 @@
 package resources;
 
-import com.sun.deploy.net.HttpRequest;
-import matching.Matcher;
-import matching.QueryParameter;
 import matching.QueryResult;
 import model.Model;
+import model.Rating;
 import model.User;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.StreamingOutput;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.ArrayList;
-import java.util.Enumeration;
 
 /**
  * Created by jonathan on 30-9-15.
  * kan geen xml parsen, daarom aparte xml path
  */
-@Path("/users")
-public class UserResource extends SearchableResource<User>{
+@Path("/ratings")
+public class RatingResource extends SearchableResource<Rating>{
 
 
 
@@ -33,12 +28,13 @@ public class UserResource extends SearchableResource<User>{
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON})
-    public Response getUsers(){
+    public Response getRatings(){
 
 
 
         Model model = (Model) servletContext.getAttribute("model");
-        QueryResult<User> queryResult = getResources(User.class, model.getUsers());
+        QueryResult<Rating> queryResult = getResources(Rating.class, model.getRatings());
+
 
        return Response.accepted(queryResult).build();
 
@@ -49,10 +45,10 @@ public class UserResource extends SearchableResource<User>{
     @GET
     @Path("/xml")
     @Produces({ MediaType.APPLICATION_XML})
-    public ArrayList<User> getUsersXML(){
+    public ArrayList<Rating> getUsersXML(){
 
         Model model = (Model) servletContext.getAttribute("model");
-        QueryResult<User> queryResult = getResources(User.class, model.getUsers());
+        QueryResult<Rating> queryResult = getResources(Rating.class, model.getRatings());
 
         return queryResult.getResults();
 

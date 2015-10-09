@@ -21,6 +21,7 @@ public class Model {
     private ArrayList<AccessToken> accessTokens = new ArrayList<>();
     private ArrayList<User> users = new ArrayList<>();
     private ArrayList<Movie> movies = new ArrayList<>();
+    private ArrayList<Rating> ratings = new ArrayList<>();
 
     public ArrayList<User> getUsers() {
         return users;
@@ -30,53 +31,20 @@ public class Model {
         return movies;
     }
 
+    public ArrayList<Rating> getRatings() {
+        return ratings;
+    }
 
     public void addUser(final User u){
         users.add(u);
     }
 
+    public void addRating(final Rating r){
+        ratings.add(r);
+    }
+
     public void addMovie(final Movie m){
         movies.add(m);
-    }
-
-
-
-
-    public ArrayList<User>getUserByFirstname(final String firstName){
-
-        ArrayList<User> usersWithNickname = new ArrayList<>();
-
-        for(User u : getUsers()){
-            if(u.hasFirstName(firstName)){
-                usersWithNickname.add(u);
-            }
-        }
-        return usersWithNickname;
-    }
-
-    public ArrayList<User>getUserByNickName(final String nickName){
-
-        ArrayList<User> usersWithNickname = new ArrayList<>();
-
-        for(User u : getUsers()){
-            if(u.hasNickName(nickName)){
-                usersWithNickname.add(u);
-            }
-        }
-
-
-
-
-        return usersWithNickname;
-    }
-    public ArrayList<Movie> getMoviesByTitle(final String title){
-        ArrayList<Movie> r = new ArrayList<>();
-        for(Movie m : getMovies()){
-            if(m.getTitel().toLowerCase().contains(title.toLowerCase())){
-                r.add(m);
-            }
-        }
-        return r;
     }
 
     public AccessToken giveUserAccessToken(User user){
@@ -114,6 +82,8 @@ public class Model {
         }
         return null;
     }
+
+
 
 
 

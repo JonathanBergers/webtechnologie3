@@ -9,6 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by jonathan on 6-10-15.
  */
+@XmlRootElement
 public class QueryResult<T> {
 
 

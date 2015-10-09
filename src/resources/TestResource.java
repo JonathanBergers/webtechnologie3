@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Created by jonathan on 6-10-15.
  */
 @Path("/test")
-public class TestResource extends BaseResource<TestObject> {
+public class TestResource extends SearchableResource<TestObject> {
 
 
     @GET
@@ -31,7 +31,7 @@ public class TestResource extends BaseResource<TestObject> {
         }
 
 
-        return getResources(TestObject.class, testObjects);
+        return getResources(TestObject.class, testObjects).getResults();
 
     }
 }

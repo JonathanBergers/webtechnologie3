@@ -1,7 +1,9 @@
 package resources;
 
+import matching.QueryResult;
 import model.Model;
 import model.Movie;
+import model.User;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.*;
@@ -15,22 +17,34 @@ import java.util.ArrayList;
  * Created by falco on 30-9-15.
  */
 @Path("/movies")
-public class MovieResource {
+public class MovieResource extends SearchableResource<Movie>{
 
-    @Context
-    ServletContext servletContext;
+
+    @GET
+    @Produces({ MediaType.APPLICATION_JSON})
+    public Response getMovies(){
+
+
+
+        Model model = (Model) servletContext.getAttribute("model");
+        QueryResult<Movie> queryResult = getResources(Movie.class, model.getMovies());
+
+        return Response.accepted(queryResult).build();
+
+    }
 
 
 
     @GET
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public ArrayList<Movie> getMovies(@QueryParam("title") String title){
-        Model model = (Model) servletContext.getAttribute("model");
-        if(title == null){
-            return model.getMovies();
-        }
+    @Path("/xml")
+    @Produces({ MediaType.APPLICATION_XML})
+    public ArrayList<Movie> getMoviesXML(){
 
-        return model.getMoviesByTitle(title);
+        Model model = (Model) servletContext.getAttribute("model");
+        QueryResult<Movie> queryResult = getResources(Movie.class, model.getMovies());
+
+        return queryResult.getResults();
+
     }
 
 

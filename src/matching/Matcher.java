@@ -38,6 +38,12 @@ public class Matcher<T> {
 
     }
 
+    /**filtert alle items op basis van de meegegeven queries
+     *
+     * @param queryParameters
+     * @param items
+     * @return
+     */
     public QueryResult<T> getResult(ArrayList<QueryParameter<?>> queryParameters, ArrayList<T> items){
 
         HashMap<QueryParameter, Method> methodParamMap = getValidQueries(new HashMap<QueryParameter, Method>(), queryParameters);
@@ -91,6 +97,13 @@ public class Matcher<T> {
 
             Object o = m.invoke(item);
 
+
+            // als je zoekt op iets dat null is
+            if(o == null){
+                o = "null";
+            }
+
+
             // kijken of de typen wel hetzelfde zijn
             if(o.getClass().equals(q.getValue().getClass())){
 
@@ -140,7 +153,8 @@ public class Matcher<T> {
             if (("get" + qp.getName().toLowerCase()).equals(m.getName().toLowerCase())) {
 
                 //alleen int of Strings voor deze matcher
-                if(m.getReturnType().equals(String.class) || m.getReturnType().equals(Integer.class)){
+                if(m.getReturnType().equals(String.class) || m.getReturnType().equals(int.class) || m.getReturnType().equals(Integer.class)){
+
                     error = false;
                     methodMap.put(qp, m);
                     break;

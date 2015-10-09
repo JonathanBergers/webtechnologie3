@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Created by jonathan on 6-10-15.
  */
-public abstract class BaseResource<T> {
+public abstract class SearchableResource<T> {
 
 
 
@@ -36,7 +36,7 @@ public abstract class BaseResource<T> {
 
 
 
-    public ArrayList<T> getResources(Class classType, ArrayList<T> allItems){
+    public QueryResult<T> getResources(Class classType, ArrayList<T> allItems){
 
         Enumeration<String> parameterNames = request.getParameterNames();
         ArrayList<QueryParameter<?>> parameters = new ArrayList<QueryParameter<?>>();
@@ -45,17 +45,32 @@ public abstract class BaseResource<T> {
 
 
             String parameterName = parameterNames.nextElement();
-            System.out.println(parameterName);
             String parameterValue = request.getParameter(parameterName);
-            QueryParameter<String> queryParam = new QueryParameter<String>(parameterName, parameterValue);
-            parameters.add(queryParam);
+            System.out.println(parameterName + " : "+ parameterValue);
+
+
+
+
+            // als het een int is
+            if(parameterValue.matches("-?\\d+(\\.\\d+)?")){
+
+                QueryParameter<Integer> queryParam = new QueryParameter<Integer>(parameterName, Integer.parseInt(parameterValue));
+
+                System.out.println("INT" + queryParam.getValue());
+                parameters.add(queryParam);
+
+            }else{
+                QueryParameter<String> queryParam = new QueryParameter<String>(parameterName, parameterValue);
+                parameters.add(queryParam);
+            }
+
+
+
 
         }
 
 
-
-        QueryResult<T> queryResult = new Matcher<>(classType).getResult(parameters, allItems);
-        return queryResult.getResults();
+        return  new Matcher<>(classType).getResult(parameters, allItems);
 
 
     }

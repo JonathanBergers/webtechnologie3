@@ -15,6 +15,7 @@ public class Rating {
 
         this.user = user;
         this.movie = movie;
+
     }
 
     public Rating(){

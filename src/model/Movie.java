@@ -162,4 +162,8 @@ public class Movie {
     public boolean hasRating() {
         return !getRatings().isEmpty();
     }
+
+    public boolean hasId(int id) {
+        return getId() == id;
+    }
 }

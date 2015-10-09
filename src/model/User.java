@@ -8,6 +8,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * Created by jonathan on 30-9-15.
@@ -27,7 +30,7 @@ public class User {
 
     private String firstname, lastname, infix, password, email;
     private AccessToken accessToken;
-    private ArrayList<Rating> ratings =  new ArrayList<>();
+    private Set<Rating> ratings =  new TreeSet<>();
 
 
     public User(String firstname, String lastname, String infix, String password, String email) {
@@ -116,7 +119,7 @@ public class User {
 
     @JsonIgnore
     @XmlTransient
-    public ArrayList<Rating> getRatings() {
+    public Set<Rating> getRatings() {
         return ratings;
     }
 
@@ -151,4 +154,12 @@ public class User {
     public boolean hasToken(String token) {
         return getAccessToken().equals(token);
     }
+
+    public boolean hasRating(Rating rating){
+
+        return getRatings().contains(rating);
+
+    }
+
+
 }

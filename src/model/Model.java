@@ -41,6 +41,8 @@ public class Model {
 
     public void addRating(final Rating r){
         ratings.add(r);
+
+        r.getUser().addRating(r);
     }
 
     public void addMovie(final Movie m){
@@ -103,6 +105,18 @@ public class Model {
         return ratingswithUsers;
 
     }
+
+
+    public Movie getMovieById(int id) {
+
+        for (Movie m : getMovies()) {
+            if (m.hasId(id)) {
+                return m;
+            }
+        }
+        return null;
+    }
+
 
 
 }

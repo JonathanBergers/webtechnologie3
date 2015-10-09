@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by falco on 30-9-15.
  */
-@Path("/movies")
+@Path("movies/")
 public class MovieResource extends SearchableResource<Movie>{
 
 

@@ -145,7 +145,7 @@ public class Movie {
             i++;
         }
         overAllRating = Math.round(totalStars/(i));
-        System.out.println("OverallRating = "+overAllRating+"\n");
+        System.out.println("OverallRating = " + overAllRating + "\n");
     }
     public void deleteRatingFromUser(User user){
         for (int i = 0; i < ratings.size(); i++) {
@@ -157,5 +157,9 @@ public class Movie {
             }
         }
         calculateOverallRating();
+    }
+
+    public boolean hasRating() {
+        return !getRatings().isEmpty();
     }
 }

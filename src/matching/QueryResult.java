@@ -41,6 +41,8 @@ public class QueryResult<T> {
 
 
 
+
+
     public ArrayList<T> getResults() {
         return results;
     }

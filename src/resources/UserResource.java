@@ -61,7 +61,7 @@ public class UserResource extends SearchableResource<User>{
             return Response.status(403).entity(restResponse).build();
         }
 
-        RegistrationService registrationService = new RegistrationService(jsonObject,(Model) servletContext.getAttribute("model"));
+        RegistrationService registrationService = new RegistrationService(jsonObject,getModel());
 
         restResponse = registrationService.validateUserCredentials(restResponse);
 
@@ -78,10 +78,7 @@ public class UserResource extends SearchableResource<User>{
     @Produces({ MediaType.APPLICATION_JSON})
     public Response getUsers(){
 
-
-
-        Model model = (Model) servletContext.getAttribute("model");
-        QueryResult<User> queryResult = getResources(User.class, model.getUsers());
+        QueryResult<User> queryResult = getResources(User.class, getModel().getUsers());
 
 
        return Response.accepted(queryResult).build();
@@ -95,8 +92,7 @@ public class UserResource extends SearchableResource<User>{
     @Produces({ MediaType.APPLICATION_XML})
     public ArrayList<User> getUsersXML(){
 
-        Model model = (Model) servletContext.getAttribute("model");
-        QueryResult<User> queryResult = getResources(User.class, model.getUsers());
+        QueryResult<User> queryResult = getResources(User.class, getModel().getUsers());
 
         return queryResult.getResults();
 

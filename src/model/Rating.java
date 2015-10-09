@@ -35,11 +35,17 @@ public class Rating {
         }
 
     }
+
+
     public User getUser(){
         return this.user;
     }
 
     public Movie getMovie() {
         return movie;
+    }
+
+    public boolean hasUser(User u) {
+        return getUser().equals(u);
     }
 }

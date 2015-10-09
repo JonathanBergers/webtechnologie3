@@ -7,16 +7,13 @@ public class AccessToken {
 
 
     private String token;
-    private User user;
 
 
-    public AccessToken(final User user, int tokenNumber) {
-        this.user = user;
-        generateToken(user, tokenNumber);
+    public AccessToken(String token) {
+        this.token = token;
+
     }
 
-    public AccessToken() {
-    }
 
 
     private void generateToken(final User user, final int tokenNumber){
@@ -28,10 +25,8 @@ public class AccessToken {
         return token;
     }
 
-    public User getUser() {
-        return user;
+    @Override
+    public boolean equals(Object obj) {
+        return getToken().equals(obj);
     }
-
-
-
 }

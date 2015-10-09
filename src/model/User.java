@@ -26,6 +26,7 @@ public class User {
 
 
     private String firstname, lastname, infix, password, email;
+    private AccessToken accessToken;
     private ArrayList<Rating> ratings =  new ArrayList<>();
 
 
@@ -36,6 +37,7 @@ public class User {
         this.infix = infix;
         this.password = password;
         this.email = email;
+        generateToken();
     }
 
     public User(String firstname, String lastname, String password, String email) {
@@ -47,6 +49,10 @@ public class User {
     public User() {
     }
 
+
+    private void generateToken(){
+        this.accessToken = new AccessToken(getFirstname() + "TOKEN");
+    }
 
 
 
@@ -62,6 +68,8 @@ public class User {
         return infix;
     }
 
+    @XmlTransient
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -127,5 +135,20 @@ public class User {
 
     public boolean hasPassword(String password){
         return getPassword().equals(password);
+    }
+
+
+    @JsonIgnore
+    @XmlTransient
+    public AccessToken getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(AccessToken accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public boolean hasToken(String token) {
+        return getAccessToken().equals(token);
     }
 }

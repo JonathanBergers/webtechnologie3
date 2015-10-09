@@ -151,8 +151,12 @@ public class RegistrationService {
             return responseMessage;
 
 
-        }else{ model.addUser(new User(firstname, lastName, passWord, email));
+        }else{
+            User u = new User(firstname, lastName, passWord, email);
+            model.addUser(u);
+            responseMessage.addMessage("accesstoken", u.getAccessToken().getToken());
            }
+
 
         return responseMessage;
     }

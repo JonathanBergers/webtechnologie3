@@ -47,27 +47,8 @@ public class Model {
         movies.add(m);
     }
 
-    public AccessToken giveUserAccessToken(User user){
-        AccessToken accessToken = getAccessTokenFromUser(user);
-        if(accessToken == null){
-            accessToken = new AccessToken(user, (accessTokens.size()+1)*12-1);
-            accessTokens.add(accessToken);
-        }
-        return accessToken;
-    }
-    /**
-     *
-     * @param u the user
-     * @return null if no accessToken is assigned to the user of the accessToken of that user
-     */
-    private AccessToken getAccessTokenFromUser(User u){
-        for(AccessToken t : accessTokens){
-            if(t.getUser().equals(u)){
-                return t;
-            }
-        }
-        return null;
-    }
+
+
 
     /**
      *
@@ -75,9 +56,9 @@ public class Model {
      * @return null if the token is not correct or the user with the given token
      */
     public User getUserWithAccessToken(String token){
-        for(AccessToken t : accessTokens){
-            if(t.getToken().equals(token)){
-                return t.getUser();
+        for(User t : getUsers()){
+            if(t.hasToken(token)){
+                return t;
             }
         }
         return null;
@@ -99,6 +80,29 @@ public class Model {
 
 
 
+    public ArrayList<Movie> getMoviesWithRating(){
+
+        ArrayList<Movie> moviesWithRating = new ArrayList<>();
+        for(Movie m: getMovies()){
+            if(m.hasRating()){
+                moviesWithRating.add(m);
+            }
+        }
+        return moviesWithRating;
+
+    }
+
+    public ArrayList<Rating> getRatingsWithUser(User u){
+
+        ArrayList<Rating> ratingswithUsers = new ArrayList<>();
+        for(Rating m: getRatings()){
+            if(m.hasUser(u)){
+                ratingswithUsers.add(m);
+            }
+        }
+        return ratingswithUsers;
+
+    }
 
 
 }

@@ -34,6 +34,23 @@ public abstract class SearchableResource<T> {
     HttpServletRequest request;
 
 
+    /**
+     * check if token is send.
+     * check if token is valid
+     * if both true, return the user
+     * @return
+     */
+    protected User getUserFromToken(){
+
+        String token = request.getHeader("accessToken");
+        if(token == null) return null;
+        if(token.length() == 0 ) return null;
+        return getModel().getUserWithAccessToken(token);
+    }
+
+    protected Model getModel(){
+        return (Model) servletContext.getAttribute("model");
+    }
 
 
     public QueryResult<T> getResources(Class classType, ArrayList<T> allItems){

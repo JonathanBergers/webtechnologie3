@@ -4,6 +4,7 @@ import matching.QueryResult;
 import model.Model;
 import model.Rating;
 import model.User;
+import register.CustomRestResponse;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -26,34 +27,58 @@ public class RatingResource extends SearchableResource<Rating>{
 
 
 
+
     @GET
+    @Path("/")
     @Produces({ MediaType.APPLICATION_JSON})
     public Response getRatings(){
 
+        User u = getUserFromToken();
+        if(u== null){
+            return Response.status(400).entity(new CustomRestResponse().addError("accessToken", "invalid access token")).build();
+        }
 
-
-        Model model = (Model) servletContext.getAttribute("model");
-        QueryResult<Rating> queryResult = getResources(Rating.class, model.getRatings());
-
-
-       return Response.accepted(queryResult).build();
+        return Response.accepted(getModel().getRatingsWithUser(u)).build();
 
     }
 
 
 
     @GET
-    @Path("/xml")
+    @Path("/search/xml")
     @Produces({ MediaType.APPLICATION_XML})
-    public ArrayList<Rating> getUsersXML(){
+    public ArrayList<Rating> searchRatingsXML(){
 
-        Model model = (Model) servletContext.getAttribute("model");
-        QueryResult<Rating> queryResult = getResources(Rating.class, model.getRatings());
+
+        User u = getUserFromToken();
+        if(u== null){
+            return new ArrayList<>();
+        }
+
+
+        QueryResult<Rating> queryResult = getResources(Rating.class, getModel().getRatingsWithUser(u));
 
         return queryResult.getResults();
 
     }
 
+
+    @GET
+    @Path("/search/")
+    @Produces({ MediaType.APPLICATION_JSON})
+    public Response searchRatings(){
+
+        User u = getUserFromToken();
+        if(u== null){
+            return Response.status(400).entity(new CustomRestResponse().addError("accessToken", "invalid access token")).build();
+        }
+
+
+        QueryResult<Rating> queryResult = getResources(Rating.class, getModel().getRatingsWithUser(u));
+
+        return Response.accepted(queryResult).build();
+
+    }
 
 
 

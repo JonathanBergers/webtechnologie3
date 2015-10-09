@@ -1,5 +1,6 @@
 package matching;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 
 /**

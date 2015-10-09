@@ -40,8 +40,8 @@ public class UserResource {
 
 
     @GET
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public QueryResult<User> getUserByNickName( @QueryParam("nickname") final String nickname){
+    @Produces({ MediaType.APPLICATION_JSON})
+    public Response getUsers(){
 
         Enumeration<String> parameterNames = request.getParameterNames();
         ArrayList<QueryParameter<?>> parameters = new ArrayList<QueryParameter<?>>();
@@ -57,19 +57,58 @@ public class UserResource {
 
         }
 
-        System.out.println(nickname);
 
         Model model = (Model) servletContext.getAttribute("model");
         QueryResult<User> queryResult = new Matcher<>(User.class).getResult(parameters, model.getUsers());
 
 
 
-       return queryResult;
+        //TODO Opmerking. kan geen arraylist mee sturen in response response met xml. daarom maar geen xml.
+//        // stomme xml kan niet parsen
+//        String result = request.getHeader("Accept");
+//
+//        if(result != null){
+//            if(!result.isEmpty()){
+//                System.out.printf("XML");
+//                return Response.accepted().entity(queryResult.getResults).build();
+//            }
+//        }
+
+
+       return Response.accepted(queryResult).build();
 
     }
 
 
 
+    @GET
+    @Path("/xml")
+    @Produces({ MediaType.APPLICATION_XML})
+    public ArrayList<User> getUsersXML(){
+
+        Enumeration<String> parameterNames = request.getParameterNames();
+        ArrayList<QueryParameter<?>> parameters = new ArrayList<QueryParameter<?>>();
+
+        while(parameterNames.hasMoreElements()){
+
+
+            String parameterName = parameterNames.nextElement();
+            System.out.println(parameterName);
+            String parameterValue = request.getParameter(parameterName);
+            QueryParameter<String> queryParam = new QueryParameter<String>(parameterName, parameterValue);
+            parameters.add(queryParam);
+
+        }
+
+
+        Model model = (Model) servletContext.getAttribute("model");
+        QueryResult<User> queryResult = new Matcher<>(User.class).getResult(parameters, model.getUsers());
+
+
+
+        return queryResult.getResults();
+
+    }
 
 
 

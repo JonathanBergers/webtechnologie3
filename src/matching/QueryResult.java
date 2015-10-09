@@ -1,9 +1,7 @@
 package matching;
 
-import com.sun.xml.txw2.annotation.XmlElement;
-import matching.Error;
-import matching.QueryError;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
@@ -14,14 +12,21 @@ import java.util.ArrayList;
 public class QueryResult<T> {
 
 
+
     private ArrayList<T> results = new ArrayList<>();
 
-    private ArrayList<matching.Error> errors = new ArrayList<>();
+
+    private ArrayList<Error> errors = new ArrayList<>();
 
     public QueryResult(ArrayList<T> results, ArrayList<Error> errors) {
         this.results = results;
         this.errors = errors;
     }
+
+    public QueryResult(){
+
+    }
+
 
     public void addError(final QueryError<T> queryError){
 
@@ -32,6 +37,7 @@ public class QueryResult<T> {
 
         results.add(result);
     }
+
 
 
     public ArrayList<T> getResults() {

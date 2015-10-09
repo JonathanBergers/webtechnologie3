@@ -25,22 +25,21 @@ import java.util.ArrayList;
 public class User {
 
 
-    private String nickname, firstname, lastname, infix, password;
+    private String firstname, lastname, infix, password, email;
     private ArrayList<Rating> ratings =  new ArrayList<>();
 
-    public User(String nickname, String firstname, String lastname, String infix, String password) {
-        this.nickname = nickname;
+
+    public User(String firstname, String lastname, String infix, String password, String email) {
+
         this.firstname = firstname;
         this.lastname = lastname;
         this.infix = infix;
         this.password = password;
+        this.email = email;
     }
 
-    public User(String nickname, String firstname, String lastname, String password) {
-        this.nickname = nickname;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.password = password;
+    public User(String firstname, String lastname, String password, String email) {
+        this(firstname, lastname, "", password, email);
     }
 
 
@@ -49,9 +48,7 @@ public class User {
     }
 
 
-    public String getNickname() {
-        return nickname;
-    }
+
 
     public String getFirstname() {
         return firstname;
@@ -70,9 +67,6 @@ public class User {
     }
 
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;
@@ -92,7 +86,7 @@ public class User {
 
     @Override
     public String toString() {
-        String toString = getNickname() + ": " + getFirstname();
+        String toString = getFirstname();
         if(getInfix() == null){
 
             toString += " " + getLastname();
@@ -110,10 +104,7 @@ public class User {
         return getFirstname().equals(name);
     }
 
-    public boolean hasNickName(final String nickName){
 
-        return getNickname().equals(nickName);
-    }
 
     @JsonIgnore
     @XmlTransient

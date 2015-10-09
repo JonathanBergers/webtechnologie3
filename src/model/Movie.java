@@ -117,14 +117,14 @@ public class Movie {
             if(r.getUser().equals(rating.getUser())){
                 rating.getUser().addRating(rating);
                 ratings.set(ratings.indexOf(r), rating);
-                System.out.println("Rating changed to "+rating.getStars()+ " by User: " + rating.getUser().getNickname());
+                System.out.println("Rating changed to "+rating.getStars()+ " by User: " + rating.getUser().getFirstname());
                 calculateOverallRating();
                 return;
             }
         }
         rating.getUser().addRating(rating);
         ratings.add(rating);
-        System.out.println("rating added of "+ rating.getStars()+ " by User: " + rating.getUser().getNickname());
+        System.out.println("rating added of "+ rating.getStars()+ " by User: " + rating.getUser().getFirstname());
         calculateOverallRating();
 
     }
@@ -150,7 +150,7 @@ public class Movie {
     public void deleteRatingFromUser(User user){
         for (int i = 0; i < ratings.size(); i++) {
             if(ratings.get(i).getUser().equals(user)){
-                System.out.println("Delete Rating of " + ratings.get(i).getStars() + " Stars" + " by User: " + ratings.get(i).getUser().getNickname());
+                System.out.println("Delete Rating of " + ratings.get(i).getStars() + " Stars" + " by User: " + ratings.get(i).getUser().getFirstname());
                 user.deleteRating(ratings.get(i));
                 ratings.remove(i);
                 break;

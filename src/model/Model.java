@@ -88,6 +88,14 @@ public class Model {
 
 
 
+    public User getUserByName(final String name){
+        for (User u: getUsers()){
+            if(u.hasFirstName(name)){
+                return u;
+            }
+        }
+        return null;
+    }
 
 
 

@@ -21,9 +21,12 @@ public class ContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
 
+
+        String name = "Adolf", lastname = "Hitler", password = "wachtwoord", email = name + "@" + lastname +".com";
+
         Model model = new Model();
         for (int i = 0; i < 10; i++) {
-            model.addUser(new User("adolf" + i, "Adolf" + i, "Hitler"+ i, "Jemoder"));
+            model.addUser(new User(name + "je"+ i, name + i, lastname+ i, password+i, email ));
             model.addMovie(new Movie(i, i, "KANKER DATE", "OK" + i, "ok", "OKEE", 10000 + i));
             model.addRating(new Rating(10, model.getUsers().get(i), model.getMovies().get(i)));
 

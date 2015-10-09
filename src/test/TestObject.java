@@ -17,6 +17,8 @@ public class TestObject {
         this.name = name;
     }
 
+    public TestObject(){};
+
     public String getName() {
         return name;
     }

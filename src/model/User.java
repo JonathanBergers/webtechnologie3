@@ -18,10 +18,11 @@ import java.util.*;
  o Nickname
  o Wachtwoord
  *
+
  */
 
 @XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 public class User {
 
 
@@ -88,8 +89,7 @@ public class User {
         this.infix = infix;
     }
 
-    @XmlTransient
-    @JsonIgnore
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -170,5 +170,17 @@ public class User {
     @Override
     public boolean equals(Object obj) {
         return (getFirstname()+getLastname()).equals(obj);
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setRatings(ArrayList<Rating> ratings) {
+        this.ratings = ratings;
     }
 }

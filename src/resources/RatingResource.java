@@ -34,7 +34,21 @@ public class RatingResource extends SearchableResource<Rating>{
             return Response.status(400).entity(new CustomRestResponse().addError("accessToken", "invalid access token")).build();
         }
 
-        return Response.accepted(getModel().getRatingsWithUser(u)).build();
+        return Response.accepted(u.getRatings()).build();
+
+    }
+
+    @GET
+    @Path("xml")
+    @Produces({ MediaType.APPLICATION_XML})
+    public ArrayList<Rating> getRatingsXML(){
+
+        User u = getUserFromToken();
+        if(u == null){
+            return new ArrayList<Rating>();
+        }
+
+        return u.getRatings();
 
     }
 
@@ -64,41 +78,7 @@ public class RatingResource extends SearchableResource<Rating>{
     }
 
 
-    @GET
-    @Path("search/xml")
-    @Produces({ MediaType.APPLICATION_XML})
-    public ArrayList<Rating> searchRatingsXML(){
 
-
-        User u = getUserFromToken();
-        if(u== null){
-            return new ArrayList<>();
-        }
-
-
-        QueryResult<Rating> queryResult = getResources(Rating.class, getModel().getRatingsWithUser(u));
-
-        return queryResult.getResults();
-
-    }
-
-
-    @GET
-    @Path("search")
-    @Produces({ MediaType.APPLICATION_JSON})
-    public Response searchRatings(){
-
-        User u = getUserFromToken();
-        if(u== null){
-            return Response.status(400).entity(new CustomRestResponse().addError("accessToken", "invalid access token")).build();
-        }
-
-
-        QueryResult<Rating> queryResult = getResources(Rating.class, getModel().getRatingsWithUser(u));
-
-        return Response.accepted(queryResult).build();
-
-    }
 
 
 

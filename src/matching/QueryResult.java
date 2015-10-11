@@ -1,6 +1,8 @@
 package matching;
 
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 
@@ -8,6 +10,7 @@ import java.util.ArrayList;
  * Created by jonathan on 6-10-15.
  */
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 public class QueryResult<T> {
 
 

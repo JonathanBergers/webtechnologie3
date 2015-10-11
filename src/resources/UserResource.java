@@ -66,6 +66,7 @@ public class UserResource extends SearchableResource<User>{
 
 
     @GET
+    @Path("xml")
     @Produces({ MediaType.APPLICATION_XML})
     public ArrayList<User> getUsersXML(){
 

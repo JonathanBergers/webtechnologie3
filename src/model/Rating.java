@@ -1,8 +1,17 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 /**
  * Created by falco on 6-10-15.
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 public class Rating{
 
     private int stars;
@@ -37,13 +46,22 @@ public class Rating{
 
     }
 
-
+    @JsonIgnore
+    @XmlTransient
     public User getUser(){
         return this.user;
     }
 
     public Movie getMovie() {
         return movie;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
     public boolean hasUser(User u) {

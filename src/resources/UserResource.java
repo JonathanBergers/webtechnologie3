@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Created by jonathan on 30-9-15.
  * kan geen xml parsen, daarom aparte xml path
  */
-@Path("/users")
+@Path("users")
 public class UserResource extends SearchableResource<User>{
 
 
@@ -24,7 +24,6 @@ public class UserResource extends SearchableResource<User>{
 
 
     @POST
-    @Path("/")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({ MediaType.APPLICATION_JSON})
     public Response registerUser(String testObject){
@@ -54,7 +53,6 @@ public class UserResource extends SearchableResource<User>{
 
 
     @GET
-    @Path("/")
     @Produces({ MediaType.APPLICATION_JSON})
     public Response getUsers(){
 
@@ -68,7 +66,6 @@ public class UserResource extends SearchableResource<User>{
 
 
     @GET
-    @Path("/xml/")
     @Produces({ MediaType.APPLICATION_XML})
     public ArrayList<User> getUsersXML(){
 

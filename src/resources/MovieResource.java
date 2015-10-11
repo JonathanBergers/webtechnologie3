@@ -13,12 +13,11 @@ import java.util.ArrayList;
 /**
  * Created by falco on 30-9-15.
  */
-@Path("/movies/")
+@Path("movies")
 public class MovieResource extends SearchableResource<Movie>{
 
 
     @GET
-    @Path("/")
     @Produces({ MediaType.APPLICATION_JSON})
     public Response getMovies(){
 
@@ -31,19 +30,19 @@ public class MovieResource extends SearchableResource<Movie>{
 
     }
 
-//
-//
-//    @GET
-//    @Path("/xml")
-//    @Produces({ MediaType.APPLICATION_XML})
-//    public ArrayList<Movie> getMoviesXML(){
-//
-//        Model model = (Model) servletContext.getAttribute("model");
-//        QueryResult<Movie> queryResult = getResources(Movie.class, model.getMovies());
-//
-//        return queryResult.getResults();
-//
-//    }
+
+
+    @GET
+    @Path("xml")
+    @Produces({ MediaType.APPLICATION_XML})
+    public ArrayList<Movie> getMoviesXML(){
+
+        Model model = (Model) servletContext.getAttribute("model");
+        QueryResult<Movie> queryResult = getResources(Movie.class, model.getMovies());
+
+        return queryResult.getResults();
+
+    }
 
 
 }

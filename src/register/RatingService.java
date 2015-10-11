@@ -2,7 +2,6 @@ package register;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import com.sun.tools.xjc.reader.RawTypeSet;
 import model.Model;
 import model.Movie;
 import model.Rating;
@@ -26,14 +25,14 @@ public class RatingService {
 
 
 
-        JsonPrimitive idObject = jsonObject.getAsJsonPrimitive("id");
+        JsonPrimitive idObject = jsonObject.getAsJsonPrimitive("tt");
         JsonPrimitive ratingObject = jsonObject.getAsJsonPrimitive("rating");
 
         int movieId ;
         int rating ;
 
         if(idObject == null){
-            responseMessage.addError("FIELD1", "MOVIE_ID_MISSING");
+            responseMessage.addError("FIELD1", "MOVIE_TT_MISSING");
         }
         if(ratingObject == null){
             responseMessage.addError("FIELD2", "RATIG_MISSING");
@@ -69,10 +68,10 @@ public class RatingService {
 
         }
 
-        Movie m = model.getMovieById(movieId);
+        Movie m = model.getMovieByTT(movieId);
 
         if(m == null){
-            return responseMessage.addError("MOVIEID", "no movie found with id : " + movieId);
+            return responseMessage.addError("TT", "no movie found with tt : " + movieId);
         }
 
         Rating theRating = new Rating(rating, user, m);

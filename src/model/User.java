@@ -88,6 +88,8 @@ public class User {
         this.infix = infix;
     }
 
+    @XmlTransient
+    @JsonIgnore
     public void setPassword(String password) {
         this.password = password;
     }

@@ -163,7 +163,7 @@ public class Movie {
         return !getRatings().isEmpty();
     }
 
-    public boolean hasId(int id) {
-        return getId() == id;
+    public boolean hasTT(int tt) {
+        return getTt() == tt;
     }
 }

@@ -30,7 +30,7 @@ public class ContextListener implements ServletContextListener {
 
         Model model = new Model();
         for (int i = 0; i < 10; i++) {
-            model.addUser(new User(name + "je"+ i, name + i, lastname+ i, password+i, email ));
+            model.addUser(new User(name + i, lastname + i, password+i, email ));
             model.addMovie(new Movie(i, i, "20/10/2014", "Titel" + i, "beschrijving", "Jaap filmmans", 10000 + i));
             model.addRating(new Rating(10, model.getUsers().get(i), model.getMovies().get(i)));
 

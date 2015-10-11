@@ -8,15 +8,9 @@ import model.User;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.List;
 
 /**
  * Created by jonathan on 6-10-15.

@@ -107,10 +107,10 @@ public class Model {
     }
 
 
-    public Movie getMovieById(int id) {
+    public Movie getMovieByTT(int tt) {
 
         for (Movie m : getMovies()) {
-            if (m.hasId(id)) {
+            if (m.hasTT(tt)) {
                 return m;
             }
         }

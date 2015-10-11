@@ -166,4 +166,12 @@ public class Movie {
     public boolean hasTT(int tt) {
         return getTt() == tt;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == this) return true;
+        if(!(obj instanceof Movie)) return false;
+        return ((Movie)obj).getId() == getId();
+
+    }
 }

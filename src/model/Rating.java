@@ -3,7 +3,7 @@ package model;
 /**
  * Created by falco on 6-10-15.
  */
-public class Rating {
+public class Rating{
 
     private int stars;
     private User user;
@@ -48,5 +48,17 @@ public class Rating {
 
     public boolean hasUser(User u) {
         return getUser().equals(u);
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if(obj == this) return true;
+        if(!(obj instanceof Rating)) return false;
+        Rating r = (Rating) obj;
+        if(!r.hasUser(getUser()))return false;
+        return (r.getMovie().equals(getMovie()));
+
     }
 }

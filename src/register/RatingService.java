@@ -35,7 +35,7 @@ public class RatingService {
             responseMessage.addError("FIELD1", "MOVIE_TT_MISSING");
         }
         if(ratingObject == null){
-            responseMessage.addError("FIELD2", "RATIG_MISSING");
+            responseMessage.addError("FIELD2", "RATING_MISSING");
         }
 
         if(!responseMessage.isSuccess()){
@@ -46,7 +46,7 @@ public class RatingService {
         String ratingString  = ratingObject.getAsString();
 
 
-        if(ratingString.matches("-?\\d+(\\.\\d+)?")){
+        if(!ratingString.matches("-?\\d+(\\.\\d+)?")){
 
 
             return responseMessage.addError("Rating1", "rating is not a number");
@@ -58,12 +58,12 @@ public class RatingService {
 
 
         }
-        if(movieIdString.matches("-?\\d+(\\.\\d+)?")){
+        if(!movieIdString.matches("-?\\d+(\\.\\d+)?")){
 
 
-            return responseMessage.addError("Rating1", "rating is not a number");
+            return responseMessage.addError("TT1", "TT is not a number");
         }else{
-            movieId = Integer.parseInt(ratingString);
+            movieId = Integer.parseInt(movieIdString);
 
 
         }
@@ -76,14 +76,18 @@ public class RatingService {
 
         Rating theRating = new Rating(rating, user, m);
 
-        if(user.hasRating(theRating)){
+
+
+        boolean updated = user.hasRating(theRating);
+
+        if(updated){
             responseMessage.addMessage("Rating", "UPDATED");
         }else{
             responseMessage.addMessage("Rating", "ADDED" );
 
         }
 
-        model.addRating(theRating);
+
 
         return responseMessage;
 

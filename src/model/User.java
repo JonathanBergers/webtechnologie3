@@ -27,7 +27,7 @@ public class User {
 
     private String firstname, lastname, infix, password, email;
     private AccessToken accessToken;
-    private Set<Rating> ratings =  new HashSet<>();
+    private ArrayList<Rating> ratings =  new ArrayList<>();
 
 
     public User(String firstname, String lastname, String infix, String password, String email) {
@@ -118,18 +118,25 @@ public class User {
 
     @JsonIgnore
     @XmlTransient
-    public Set<Rating> getRatings() {
+    public ArrayList<Rating> getRatings() {
         return ratings;
     }
 
-    public void addRating(Rating rating) {
-        for(Rating r : ratings){
-            if(r.getMovie().equals(rating.getMovie())){
-                r = rating;
-                return;
-            }
+    /**adds a rating, if the rating already exists returns true
+     *
+     * @param rating
+     * @return
+     */
+    public boolean addRating(Rating rating) {
+
+
+
+        if(ratings.contains(rating)){
+            ratings.get(ratings.indexOf(rating)).setStars(rating.getStars());
+            return true;
         }
-        this.ratings.add(rating);
+       ratings.add(rating);
+        return false;
     }
     public void deleteRating(Rating rating){
         ratings.remove(rating);
@@ -156,9 +163,16 @@ public class User {
 
     public boolean hasRating(Rating rating){
 
-        return getRatings().contains(rating);
+        for(Rating r: getRatings()){
+            if(r.getMovie().getId() == rating.getMovie().getId()) return true;
+        }
+        return false;
+
 
     }
 
-
+    @Override
+    public boolean equals(Object obj) {
+        return (getFirstname()+getLastname()).equals(obj);
+    }
 }

@@ -80,12 +80,16 @@ public class RatingService {
 
         boolean updated = user.hasRating(theRating);
 
+        System.out.println("UPDATED? : " + updated);
+
         if(updated){
             responseMessage.addMessage("Rating", "UPDATED");
         }else{
             responseMessage.addMessage("Rating", "ADDED" );
 
         }
+
+        model.addRating(theRating);
 
 
 

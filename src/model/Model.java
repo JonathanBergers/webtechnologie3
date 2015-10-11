@@ -39,11 +39,11 @@ public class Model {
         users.add(u);
     }
 
-    public boolean addRating(final Rating r){
+    public void addRating(final Rating r){
         ratings.add(r);
 
 
-        return r.getUser().addRating(r);
+         r.getUser().addRating(r);
     }
 
     public void addMovie(final Movie m){

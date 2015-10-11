@@ -122,21 +122,17 @@ public class User {
         return ratings;
     }
 
-    /**adds a rating, if the rating already exists returns true
-     *
-     * @param rating
-     * @return
-     */
-    public boolean addRating(Rating rating) {
+
+    public void addRating(Rating rating) {
 
 
 
         if(ratings.contains(rating)){
             ratings.get(ratings.indexOf(rating)).setStars(rating.getStars());
-            return true;
+            return;
         }
        ratings.add(rating);
-        return false;
+
     }
     public void deleteRating(Rating rating){
         ratings.remove(rating);

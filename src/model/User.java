@@ -7,10 +7,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Created by jonathan on 30-9-15.
@@ -30,7 +27,7 @@ public class User {
 
     private String firstname, lastname, infix, password, email;
     private AccessToken accessToken;
-    private Set<Rating> ratings =  new TreeSet<>();
+    private Set<Rating> ratings =  new HashSet<>();
 
 
     public User(String firstname, String lastname, String infix, String password, String email) {

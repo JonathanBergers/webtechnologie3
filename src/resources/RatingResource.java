@@ -2,27 +2,20 @@ package resources;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
-import matching.QueryResult;
-import model.Model;
 import model.Rating;
 import model.User;
 import register.CustomRestResponse;
 import register.RatingService;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 
 /**
  * Created by jonathan on 30-9-15.
  * kan geen xml parsen, daarom aparte xml path
  */
-@Path("ratings/")
+@Path("/ratings")
 public class RatingResource extends SearchableResource<Rating>{
 
 
@@ -31,6 +24,7 @@ public class RatingResource extends SearchableResource<Rating>{
 
 
     @GET
+    @Path("/")
     @Produces({ MediaType.APPLICATION_JSON})
     public Response getRatings(){
 
@@ -46,6 +40,7 @@ public class RatingResource extends SearchableResource<Rating>{
 
 
     @PUT
+    @Path("/")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({ MediaType.APPLICATION_JSON})
     public Response changeRating(String inputJson){

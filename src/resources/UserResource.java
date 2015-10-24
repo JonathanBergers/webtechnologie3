@@ -29,7 +29,7 @@ public class UserResource extends SearchableResource<User>{
     public Response registerUser(String testObject){
 
         CustomRestResponse restResponse = new CustomRestResponse();
-
+        System.out.println("KIJK");
         System.out.println(testObject);
 
         JsonObject jsonObject = new GsonBuilder().create().fromJson(testObject, JsonObject.class);

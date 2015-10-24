@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>registreer</title>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="JS/reg.js"></script>
+</head>
+<body>
+<form action="/api/users" id="registerForm" method="post">
+    <fieldset>
+        <legend>Registreer:</legend>
+        E-mail:<br>
+        <input type="text" name="email" value="niks@kut.nl">
+        <br>
+        Wachtwoord:<br>
+        <input type="password" name="password">
+        <br>
+        Wachtwoord:<br>
+        <input type="password" name="passwordConfirm">
+        <br>
+        Voornaam:<br>
+        <input type="text" name="firstname">
+        <br>
+        Tussenvoegsel:<br>
+        <input type="text" name="infix">
+        <br>
+        Achternaam:<br>
+        <input type="text" name="lastname">
+        <br><br>
+        <input type="button" value="Submit" onclick="clickkk()">
+    </fieldset>
+</form>
+
+<!-- the result of the search will be rendered inside this div -->
+<div id="result"></div>
+
+
+
+</body>
+</html>
+
+

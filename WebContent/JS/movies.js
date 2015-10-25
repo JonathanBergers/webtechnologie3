@@ -13,7 +13,7 @@ function displayMoviesInList(element, movie) {
     var length = movie["length"];
 
 
-    $(element).append("<li onclick=setContentMovie('" + element + "','" + title + "')>" + title + "</li>");
+    $(element).append("<li onclick='setContentMovie(" + element + "','" + title + ")'>" + title + "</li>");
     return;
 }
 function addMovieItem(element, movie, width){
@@ -32,14 +32,13 @@ function addMovieItem(element, movie, width){
         "<div class=\"col-md-" + width + "\"" +  ">" + "<div class=\"panel panel-default\">\n" +
         "                    <div class=\"panel-heading\">\n" +
         "                        <h3 class=\"panel-title\">\n" +
-        "                            <button type=\"button\" class=\"btn btn-default btn-lg\">\n" +
+        "                            <button type=\"button\" class=\"btn btn-default btn-lg\" onclick='setContentMovie(\"" + element + "\",\"" + title + "\")'>\n" +
         "                                <span class=\"glyphicon glyphicon-play\" aria-hidden=\"true\"></span>"+ title +
         "                            </button>\n" +
         "                        </h3>\n" +
         "                    </div>\n" +
         "                    <div class=\"panel-body\">\n" + description +
         "                           <ul class=\"list-group\">\n" +
-        createListItem("producer : " + producer) +
         createListItem("length : " + length) +
         createListItem("director : " + director) +
 
@@ -49,7 +48,7 @@ function addMovieItem(element, movie, width){
         "                </div>" + "</div>";
 
 
-    movieItem = "<div>" + title + "</div>";
+
 
     $(element).append(movieItem);
 

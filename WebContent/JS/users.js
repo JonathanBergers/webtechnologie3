@@ -30,7 +30,7 @@ function displayUsersInList(element, user, width) {
     var useritem = "<div class=\"col-md-" + width + "\"" +  ">" + "<div class=\"panel panel-default\">\n" +
         "                    <div class=\"panel-heading\">\n" +
         "                        <h3 class=\"panel-title\">\n" +
-        "                            <button type=\"button\" class=\"btn btn-default btn-lg\">\n" +
+        "                            <button type=\"button\" class=\"btn btn-default btn-lg\" onclick='setContentUser(\"" + element + "\",\"" + firstname + "\")'>\n" +
         "                                <span class=\"glyphicon glyphicon-user\" aria-hidden=\"true\"></span>"+ firstname + " " + infix + " " + lastname +
         "                            </button>\n" +
         "                        </h3>\n" +
@@ -39,6 +39,8 @@ function displayUsersInList(element, user, width) {
         "                    </div>\n" +
         "                </div>" + "</div>";
     $(element).append(useritem);
+
+
 
 }
 

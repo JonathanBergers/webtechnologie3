@@ -4,7 +4,7 @@
     <title>index</title>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="JS/movies.js"></script>
+    <script src="JS/login.js"></script>
     <script src="JS/scripts.js"></script>
     <script>
         $(document).ready(function(){
@@ -14,10 +14,18 @@
 </head>
 <body>
 
-<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
-<lu id="lu1"></lu>
-
-<button onclick=setContentMovies("#lu1")>Get External Content</button>
+<form action="/api/login" id="loginForm" method="post">
+    <fieldset>
+        <legend>Registreer:</legend>
+        Voornaam:<br>
+        <input type="text" name="firstname">
+        <br>
+        Wachtwoord:<br>
+        <input type="password" name="password">
+        <br><br>
+        <input type="button" value="Submit" onclick="submitLogin()">
+    </fieldset>
+</form>
 
 </body>
 

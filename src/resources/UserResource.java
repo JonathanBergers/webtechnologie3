@@ -2,6 +2,7 @@ package resources;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import login.LoginService;
 import matching.QueryResult;
 import model.User;
 import register.CustomRestResponse;
@@ -75,6 +76,9 @@ public class UserResource extends SearchableResource<User>{
         return queryResult.getResults();
 
     }
+
+
+
 
 
 

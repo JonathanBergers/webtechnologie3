@@ -118,6 +118,17 @@ public class Model {
         return null;
     }
 
+    public AccessToken getAccessTokenByLogin(String firstname, String password){
+        User u = getUserByName(firstname);
+        if(u==null){
+            return null;
+        }
+        if(u.getPassword().equals(password)){
+            return u.getAccessToken();
+        }
+        return null;
+    }
+
 
 
 }

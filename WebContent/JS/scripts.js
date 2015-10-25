@@ -7,6 +7,7 @@ function getObjects(element, resource, callback) {
 
         $.each(data, function (i, objects) {
             for (object in objects) {
+                console.log(objects[object]);
                 callback(element, objects[object]);
             }
         });
@@ -14,6 +15,28 @@ function getObjects(element, resource, callback) {
     return;
 }
 
+
+$.postJSON = function(url, data, callback) {
+    return $.ajax({
+        contentType: "application/json",
+        type: "POST",
+        url: url,
+        data: data,
+        success: callback,
+        dataType: "json"
+    }).done(function() {
+        console.log("OK");
+        console.log(data);
+    }).fail(function(data) {
+        console.log("ERROR");
+        console.log(data);
+    }).success(function(data){
+        console.log(data);
+        var token = data["messages"]["accesstoken"];
+        localStorage.setItem("NotflixToken", token);
+        console.log(token);
+    });
+};
 
 
 

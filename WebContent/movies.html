@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html lang="nl-NL">
 <head>
-    <title>index</title>
+    <title>movies</title>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="JS/movies.js"></script>
     <script src="JS/scripts.js"></script>
-    <script>
-        $(document).ready(function(){
-            setContentMovies("#lu1");
-        });
-    </script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 </head>
 <body>
 
-<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
-<lu id="lu1"></lu>
 
-<button onclick=setContentMovies("#lu1")>Get External Content</button>
+<div class="col-md-6">
+    <div class="row" id="rowLeft">
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="row" id="rowRight">
+        Hi
+    </div>
+</div>
+
+
+<button onclick=setContentMovies("#rowLeft")>Get External Content</button>
 
 </body>
 

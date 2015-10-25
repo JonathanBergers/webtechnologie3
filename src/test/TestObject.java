@@ -11,7 +11,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class TestObject {
 
-    private String name;
+
+    private String name ;
 
     public TestObject(String name) {
         this.name = name;

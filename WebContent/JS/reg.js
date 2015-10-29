@@ -28,8 +28,27 @@ function submitRegister() {
 
     // Send the data using post
 
-    //var posted = $.postJSON( url, {"email": email, "passwordConfirm": passwordConfirm, "password": password, "firstname": firstname, "infix": infix, "lastname": lastname});
-    //var posted = $.postJSON(url, {"email": "email@gasda.com", "passwordConfirm": "pass", "password": "pass", "firstname": "jonathan", "lastname": "bergers"});
-    var posted = $.postJSON( url, "{email: "+email+", passwordConfirm: "+passwordConfirm+", password: "+password+", firstname: "+firstname+", infix: "+infix+", lastname: "+lastname+"}" );
+
+    var posted = $.postJSON( url, "{email: "+email+", passwordConfirm: "+passwordConfirm+", password: "+password+", firstname: "+firstname+", infix: "+infix+", lastname: "+lastname+"}", advance );
     console.log(posted);
 }
+
+function advance(data){
+    if(!data.succes){
+        var token = data.messages.accesstoken;
+        saveToken(token);
+        window.location.href = "/users.html"
+    } else {
+        window.alert("er ging iets mis");
+    }
+}
+
+//setContent shit
+function setContent(data){
+    if(data.success){
+        window.location.href = "/users.html"
+    } else {
+        //do nothing
+    }
+}
+

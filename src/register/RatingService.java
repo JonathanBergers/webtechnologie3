@@ -52,8 +52,8 @@ public class RatingService {
             return responseMessage.addError("Rating1", "rating is not a number");
         }else{
             rating = Integer.parseInt(ratingString);
-            if(rating<= 0 || rating> 5){
-                return responseMessage.addError("Rating2", "rating must be between 0 and 5");
+            if(rating<= 1 || rating> 10){
+                return responseMessage.addError("Rating2", "rating must be between 1 and 10");
             }
 
 

@@ -32,8 +32,20 @@ public class LoginService {
     public CustomRestResponse validateUserCredentials(CustomRestResponse responseMessage){
         final String ID_FIRSTNAME = "firstname";
         final String ID_PASSWORD = "password";
+        final String ID_TOKEN = "NotflixToken";
 
 
+        final JsonPrimitive propertyToken = argRepr.getAsJsonPrimitive(ID_TOKEN);
+        if(propertyToken!=null){
+            String token = propertyToken.getAsString();
+            User u = model.getUserWithAccessToken(token);
+            if(u != null){
+                responseMessage.addMessage("firstname", u.getFirstname());
+            } else {
+                responseMessage.addError("AccessToken", "AccessToken is not correct");
+            }
+            return responseMessage;
+        }
 
         String firstname = "";
         String passWord = "";

@@ -1,11 +1,13 @@
 package login;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import model.AccessToken;
 import model.Model;
 import model.User;
 import register.CustomRestResponse;
+
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,9 +32,21 @@ public class LoginService {
     }
 
     public CustomRestResponse validateUserCredentials(CustomRestResponse responseMessage){
+
+
+
         final String ID_FIRSTNAME = "firstname";
         final String ID_PASSWORD = "password";
         final String ID_TOKEN = "NotflixToken";
+
+        JsonElement JsonToken = argRepr.get(ID_TOKEN);
+
+        if(JsonToken != null){
+            if(JsonToken.isJsonNull()){
+                responseMessage.addError("AccessToken", "no AccessToken");
+                return responseMessage;
+            }
+        }
 
 
         final JsonPrimitive propertyToken = argRepr.getAsJsonPrimitive(ID_TOKEN);

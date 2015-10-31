@@ -39,8 +39,11 @@ function setContent(data){
     if(data.success){
         window.location.href = "/users.html"
     } else {
-        //do nothing
+        addPagesToMenu();
     }
 }
-
+function addPagesToMenu(){
+    var menu = "#menuList";
+    $(menu).append("<li><a href='/index.html'>Home</a></li><li><a href='/movies.html'>Movies</a></li><li><a href='/registreer.html'>Register</a></li><li class='active'><a href='/login.html'>Login</a></li>");
+}
 

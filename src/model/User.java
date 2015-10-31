@@ -125,11 +125,11 @@ public class User {
 
     public void addRating(Rating rating) {
 
-
-
-        if(ratings.contains(rating)){
-            ratings.get(ratings.indexOf(rating)).setStars(rating.getStars());
-            return;
+        for(Rating r : ratings){
+            if(r.getMovie().getTitel().equals(rating.getMovie().getTitel())){
+                ratings.get(ratings.indexOf(r)).setStars(rating.getStars());
+                return;
+            }
         }
        ratings.add(rating);
 

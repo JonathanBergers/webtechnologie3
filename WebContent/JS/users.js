@@ -3,25 +3,44 @@
  */
 
 
+var firstnameUser = "";
+
+function displayUser(element, user, width){
 
 
-function displayUser(element, user){
     var firstname = user.firstname;
     var infix = user.infix;
     var lastname = user.lastname;
+    var email = user.email;
 
-    $(element).html("<p>"+firstname+" "+infix+" "+lastname+"</p>");
+
+    width = typeof width !== 'undefined' ? width : 12;
+    var userItem =
+        "<div class=\"col-md-" + width + "\"" +  ">" + "<div class=\"panel panel-default\">\n" +
+        "                    <div class=\"panel-heading\">\n" +
+        "                        <h3 class=\"panel-title\">"+firstname+"</h3>\n" +
+        "                    </div>\n" +
+        "                    <div class=\"panel-body\" id='movieBody'>\n" + firstname +" "+infix+" "+lastname+"<br>"+email+
+        "                           <ul class=\"list-group\" id='ratingsList'>" +
+        "                        </ul>" +
+        "                    </div>\n" +
+        "                </div>" + "</div>";
+
+    $(element).html(userItem);
+
+    if(firstname === firstnameUser){
+        //show extra shit
+        addRatings();
+    }
+
+
 
 
 
     return;
 }
 
-function displayLoggedinUser(firstname){
-    //setContentRatings();
-    setContentUser(firstname, "#rowRight");
 
-}
 
 function displayRatings(ratings){
 
@@ -29,7 +48,7 @@ function displayRatings(ratings){
         console.log(ratings[rating]);
         var stars = ratings[rating].stars;
         var title = ratings[rating].movie.titel;
-        $("#rowLeft").append("<p> Film = "+title+" en rating = "+stars+"stars</p><br>");
+        $("#ratingsList").append("<li  class=\"list-group-item\">"+title+" : "+stars+" stars</li>");
     }
 
 
@@ -49,7 +68,7 @@ function displayUsersInList(element, user, width) {
     var useritem = "<div class=\"col-md-" + width + "\"" +  ">" + "<div class=\"panel panel-default\">\n" +
         "                    <div class=\"panel-heading\">\n" +
         "                        <h3 class=\"panel-title\">\n" +
-        "                            <button type=\"button\" class=\"btn btn-default btn-lg\" onclick='setContentUser(\"" + firstname + "\",\"" + element + "\")'>\n" +
+        "                            <button type=\"button\" class=\"btn btn-default btn-lg\" onclick='setContentUser(\"" + firstname + "\")'>\n" +
         "                                <span class=\"glyphicon glyphicon-user\" aria-hidden=\"true\"></span>"+ firstname + " " + infix + " " + lastname +
         "                            </button>\n" +
         "                        </h3>\n" +
@@ -69,20 +88,28 @@ function displayUsersInList(element, user, width) {
 //setContent shit
 function setContent(data){
     if(data.success){
-        displayLoggedinUser(data.messages.firstname);
+        addPagesToMenu();
+        firstnameUser = data.messages.firstname;
+        setContentUser(firstnameUser, "#rowRight");
         getObjects("/api/users", displayUsersInList, "#rowLeft");
     } else {
         window.location.href = "/login.html";
     }
 }
 
-
-function setContentUser(firstname, element){
-    getObjects("/api/users?firstname="+firstname, displayUser, element);
+function addPagesToMenu(){
+    $
+    var menu = "#menuList";
+    $(menu).append("<li><a href='/index.html'>Home</a></li><li><a href='/movies.html'>Movies</a></li><li class='active'><a href='/users.html'>Users</a></li><li><a onclick='logout()'>Logout</a></li>");
 }
 
 
-function setContentRatings(){
+function setContentUser(firstname){
+    getObjects("/api/users?firstname="+firstname, displayUser, "#rowRight");
+}
+
+
+function addRatings(){
     authreq("/api/ratings", displayRatings, localStorage.getItem("NotflixToken"), "GET");
 }
 

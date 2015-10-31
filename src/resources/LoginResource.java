@@ -26,7 +26,7 @@ public class LoginResource extends SearchableResource<User>{
         JsonObject jsonObject = new GsonBuilder().create().fromJson(loginObject, JsonObject.class);
         CustomRestResponse restResponse = new CustomRestResponse();
 
-        if(jsonObject == null ||jsonObject.isJsonNull()){
+        if(jsonObject == null || jsonObject.isJsonNull()){
             restResponse.addError("convert", "json is null");
             return Response.status(403).entity(restResponse).build();
         }

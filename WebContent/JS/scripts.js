@@ -91,13 +91,6 @@ function getFirstnameFromToken(callback){
 
 
 
-function createListItem(text){
-    return "<li class=\"list-group-item\">" + text + "</li>"
-}
-
-
-
-
 
 
 

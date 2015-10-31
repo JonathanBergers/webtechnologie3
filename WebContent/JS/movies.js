@@ -58,6 +58,11 @@ function addMovieItem(element, movie, width){
 
 }
 
+function createListItem(text){
+    return "<li class=\"list-group-item\">" + text + "</li>"
+}
+
+
 
 
 
@@ -73,6 +78,13 @@ function displayMovie(element, movie, width){
     var director = movie.director;
     var length = movie.length;
     var tt = movie.tt;
+    var rating = movie.overAllRating;
+
+    if(rating == -1){
+        rating = "not rated"
+    } else {
+        rating += " stars";
+    }
 
     width = typeof width !== 'undefined' ? width : 12;
 
@@ -87,6 +99,7 @@ function displayMovie(element, movie, width){
         "                           <ul class=\"list-group\">\n" +
         createListItem("length : " + length) +
         createListItem("director : " + director) +
+        createListItem("rating : " + rating) +
         "                        </ul>\n" +
         "                    </div>\n" +
         "                </div>" + "</div>";
@@ -102,9 +115,7 @@ function displayMovie(element, movie, width){
         $("#movieBody").append("<form id='rateForm'></form>" );
         $form = $("#rateForm");
         $form.append("<input type='number' name='rating' min='1' value='10' max='10'>");
-        var rating = $form.find("input[name='rating']").val();
-        console.log(rating);
-        $form.append("<button type='button' class='btn btn-default btn-lg' onclick='rateMovie(\"" + tt + "\", \""+rating+"\")' >waardeer deze film</button>");
+        $form.append("<button type='button' class='btn btn-default btn-lg' onclick='rateMovie(\"" + tt + "\")' >waardeer deze film</button>");
     }
 
 
@@ -121,10 +132,24 @@ function displayMovie(element, movie, width){
 //setContent shit
 function setContent(data){
     loggedUser = data.success;
+    addPagesToMenu(loggedUser);
     if(loggedUser){
         firstnameUser = data.messages.firstname;
     }
     getObjects("/api/movies", addMovieItem, "#rowLeft");
+
+    //hardcoded Frozen, because Frozen
+    setContentMovie("Frozen");
+}
+
+function addPagesToMenu(loggedIn){
+    var menu = "#menuList";
+    $(menu).append("<li><a href='/index.html'>Home</a></li><li class='active'><a href='/movies.html'>Movies</a></li>");
+    if(loggedIn){
+        $(menu).append("<li><a href='/users.html'>Users</a></li><li><a onclick='logout()'>Logout</a></li>");
+    } else {
+        $(menu).append("<li><a href='/registreer.html'>Register</a></li><li><a href='/login.html'>Login</a></li>");
+    }
 }
 
 function setContentMovie(title){
@@ -134,14 +159,15 @@ function setContentMovie(title){
 
 
 
-function rateMovie(tt, rating){
+function rateMovie(tt){
+    var rating = $("#rateForm").find("input[name='rating']").val();
+
     authreq("/api/ratings", ratingReturn, localStorage.getItem("NotflixToken"), "PUT", "{'tt' : "+tt+", 'rating' : "+ rating +"}");
-    window.alert("Rating "+ rating);
 }
 
 function ratingReturn(data){
     if(data.success){
-        window.alert(data.messages.Rating);
+        window.alert("Thanks for your rating");
     }
 }
 
